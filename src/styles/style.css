@@ -1,0 +1,217 @@
+/* Importando fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@700&display=swap');
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    color: #333;
+    
+    /* 1. O FUNDO (IMAGEM + OVERLAY) */
+    
+
+    
+    background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('../assets/fundo1.png');
+    background-size: cover;
+    background-position: center;
+    
+    /* Layout para desktop (como você queria) */
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    
+    /* Isso esconde a barra de rolagem horizontal que seu layout cria */
+    overflow-x: hidden;
+}
+
+/* 2. O EFEITO DIAGONAL BRANCO (Seu estilo "perfeito") */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 80%;
+    width: 80%; 
+    height: 100%;
+    background-color: #ffffff;
+    transform: skewX(-15deg); 
+    transform-origin: top left;
+    z-index: 0; /* Fica atrás do cartão de login */
+}
+
+/* 3. O CARTÃO DE LOGIN (Seu estilo "perfeito") */
+.login-card {
+    position: relative; /* Necessário para ficar acima do pseudo-elemento */
+    z-index: 1;
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin-left: 800px;
+}
+
+.login-form h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 32px;
+    color: #6a003c; 
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.login-form .subtitulo {
+    text-align: center;
+    color: #888;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+/* 4. GRUPOS DE INPUT (LABEL + CAMPO + ÍCONE) */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left; 
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.input-field {
+    position: relative; /* Para posicionar o ícone dentro dele */
+}
+
+.input-field input {
+    width: 100%;
+    padding: 10px 40px 10px 5px; /* Espaço para o ícone à direita */
+    border: none;
+    border-bottom: 2px solid #ccc;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.input-field input:focus {
+    outline: none;
+    border-bottom-color: #b42864; /* Cor rosa/vinho */
+}
+
+.input-field .icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+#toggle-senha {
+    cursor: pointer;
+}
+
+.esqueci-senha {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: #b42864;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+/* 5. OPÇÕES DE ENTRADA */
+.opcoes-entrada {
+    margin: 25px 0;
+}
+
+.opcoes-entrada p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.botoes-opcoes {
+    display: flex; 
+    gap: 15px; 
+}
+
+.btn-opcao {
+    flex: 1; 
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background-color: #fce8ef; 
+    color: #b42864;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-opcao:hover {
+    background-color: #f8d0e0;
+}
+
+/* 6. BOTÃO PRINCIPAL "ENTRAR" */
+.btn-entrar {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #e0acbc; /* Rosa mais forte */
+    color: #6a003c;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+
+.btn-entrar:hover {
+    background-color: #d493a7;
+}
+
+/* 7. LINK DE CADASTRO */
+.link-cadastro {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.link-cadastro a {
+    color: #b42864;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+/* ======================================= */
+/* CÓDIGO RESPONSIVO         */
+/* ======================================= */
+
+/* Aplica estas regras em telas menores que 768px (tablets e celulares) */
+@media (max-width: 768px) {
+
+    /* 1. Manda o body centralizar o cartão na horizontal */
+    body {
+        justify-content: center;
+    }
+
+    /* 2. Esconde a forma diagonal branca, que não cabe no celular */
+    body::before {
+        display: none;
+    }
+
+    /* 3. Remove a margem fixa de 800px e centraliza o cartão */
+    .login-card {
+        margin-left: 0; /* Remove a margem de 800px */
+        width: 90%; /* Ocupa 90% da tela */
+    }
+
+}
