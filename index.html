@@ -1,60 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - BioClinic</title>
-    
-    <link rel="stylesheet" href="src/styles/style.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
-<body>
-
-    <div class="login-card">
-        
-        <form class="login-form">
-            <h1>Login</h1>
-            <p class="subtitulo">Preencha seus dados para acessar.</p>
-
-            <div class="input-group">
-                <label for="nome">Nome completo</label>
-                <div class="input-field">
-                    <input type="text" id="nome" name="nome" required>
-                    <i class="fa-solid fa-user icon"></i>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label for="senha">Senha</label>
-                <div class="input-field">
-                    <input type="password" id="senha" name="senha" required>
-                    <i class="fa-solid fa-eye icon" id="toggle-senha"></i>
-                </div>
-                <a href="#" class="esqueci-senha">Esqueci minha senha</a>
-            </div>
-
-            <div class="opcoes-entrada">
-                <p>Opções de entrada:</p>
-                <div class="botoes-opcoes">
-                    <button type="button" class="btn-opcao">
-                        FaceID
-                    </button>
-                    <button type="button" class="btn-opcao">
-                        CPF/RG
-                    </button>
-                </div>
-            </div>
-
-            <button type="submit" class="btn-entrar">ENTRAR</button>
-
-            <p class="link-cadastro">
-                Não tem login? <a href="#">Cadastre-se aqui</a>
-            </p>
-
-        </form>
-    </div>
-
-    <script src="src/scripts/script.js"></script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bioclinic</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

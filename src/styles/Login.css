@@ -12,11 +12,8 @@ body {
     font-family: 'Lato', sans-serif;
     color: #333;
     
-    /* 1. O FUNDO (IMAGEM + OVERLAY) */
-    
-
-    
-    background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('../assets/fundo1.png');
+   
+    background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('/src/assets/imagens/fundo1.png');
     background-size: cover;
     background-position: center;
     
@@ -49,11 +46,11 @@ body::before {
     position: relative; /* Necessário para ficar acima do pseudo-elemento */
     z-index: 1;
     background-color: #ffffff;
-    padding: 40px 30px;
+    padding: 15px 30px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     margin-left: 800px;
 }
 
@@ -79,7 +76,6 @@ body::before {
 }
 
 .input-group label {
-    display: block;
     margin-bottom: 5px;
     font-size: 14px;
     color: #555;
