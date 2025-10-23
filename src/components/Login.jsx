@@ -90,11 +90,9 @@ function Login() {
                     </div>
                 )}
 
-                {/* --- MODO FACEID (Como na imagem 'image_a511b9.png') --- */}
+                {/* --- MODO FACEID (Como na imagem 'image_a49a13.png') --- */}
                 {metodoLogin === 'faceid' && (
-                    // O <p> "Posicione o rosto..." foi REMOVIDO
                     <div className="scan-placeholder">
-                        {/* O texto "CÂMERA" foi ADICIONADO AQUI DENTRO */}
                         <span className="camera-text">CÂMERA</span>
                     </div>
                 )}

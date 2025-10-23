@@ -1,10 +1,13 @@
-import Login from './components/Login.jsx';
+import { Routes, Route } from 'react-router-dom'
+import Login from './components/Login.jsx'
+import Cadastro from './components/Cadastro.jsx' // Importar o novo componente
+
 function App() {
-  
-  // Como o Login.css já estiliza o <body>, 
-  // nós só precisamos renderizar o componente Login.
   return (
-    <Login />
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/cadastro" element={<Cadastro />} />
+    </Routes>
   );
 }
 
