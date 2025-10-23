@@ -1,3 +1,5 @@
+// 1. Importar o Link do React Router
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 
 // Importa o CSS da sua pasta de estilos
@@ -34,7 +36,6 @@ function Login() {
             {/* O formulário agora usa a função handleLoginSubmit */}
             <form className="login-form" onSubmit={handleLoginSubmit}>
                 
-                {/* --- MUDANÇA: Título e Subtítulo --- */}
                 {/* O título e o subtítulo agora são escondidos no modo FaceID */}
                 {metodoLogin !== 'faceid' && (
                     <>
@@ -43,14 +44,9 @@ function Login() {
                     </>
                 )}
 
-
-                {/* ======================================= */}
-                {/* INÍCIO DA RENDERIZAÇÃO CONDICIONAL */}
-                {/* ======================================= */}
-
                 {/* --- MODO PADRÃO (Nome/Senha) --- */}
                 {metodoLogin === 'padrao' && (
-                    <> {/* Fragmento para agrupar */}
+                    <> 
                         <div className="input-group">
                             <label htmlFor="nome">Nome completo</label>
                             <div className="input-field">
@@ -79,7 +75,7 @@ function Login() {
                     </>
                 )}
 
-                {/* --- MODO CPF (Como na imagem 'image_b0731d.png') --- */}
+                {/* --- MODO CPF --- */}
                 {metodoLogin === 'cpf' && (
                     <div className="input-group">
                         <label htmlFor="cpf">CPF</label>
@@ -90,18 +86,13 @@ function Login() {
                     </div>
                 )}
 
-                {/* --- MODO FACEID (Como na imagem 'image_a49a13.png') --- */}
+                {/* --- MODO FACEID --- */}
                 {metodoLogin === 'faceid' && (
                     <div className="scan-placeholder">
                         <span className="camera-text">CÂMERA</span>
                     </div>
                 )}
                 
-                {/* ======================================= */}
-                {/* FIM DA RENDERIZAÇÃO CONDICIONAL */}
-                {/* ======================================= */}
-
-                {/* --- MUDANÇA: Botões --- */}
                 {/* Esta secção inteira é escondida no modo FaceID */}
                 {metodoLogin !== 'faceid' && (
                     <>
@@ -132,8 +123,9 @@ function Login() {
 
                         <button type="submit" className="btn-entrar">ENTRAR</button>
 
+                        {/* 2. MUDANÇA: <a href> trocado por <Link to> */}
                         <p className="link-cadastro">
-                            Não tem login? <a href="#">Cadastre-se aqui</a>
+                            Não tem login? <Link to="/cadastro">Cadastre-se aqui</Link>
                         </p>
                     </>
                 )}

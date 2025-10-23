@@ -1,12 +1,15 @@
 import { Routes, Route } from 'react-router-dom'
 import Login from './components/Login.jsx'
-import Cadastro from './components/Cadastro.jsx' // Importar o novo componente
+import Cadastro from './components/Cadastro.jsx' // Importar a nova tela
 
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/cadastro" element={<Cadastro />} />
+      {/* A URL "/" (raiz) mostra a tela de Login */}
+      <Route path="/" element={<Login />} /> 
+      
+      {/* A URL "/cadastro" mostra a tela de Cadastro */}
+      <Route path="/cadastro" element={<Cadastro />} /> 
     </Routes>
   );
 }

@@ -6,10 +6,14 @@
 }
 
 body {
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif; /* Adicionado fallback */
     color: #333;
     
    
+    /* --- CORREÇÃO CRÍTICA DO CAMINHO --- */
+    /* 1. Mova 'fundo1.svg' para a pasta 'public/' 
+       2. Este caminho url('/fundo1.svg') vai funcionar.
+    */
     background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('/src/assets/imagens/fundo1.svg');
     background-size: cover;
     background-position: center;
@@ -52,7 +56,7 @@ body::before {
 }
 
 .login-form h1 {
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-weight: 400;                /* 2. O peso (400 = regular) */
     font-size: 32px;
     color: #630527; 
@@ -65,9 +69,8 @@ body::before {
     color: #000000;
     margin-bottom: 30px;
     font-size: 14px;
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-weight: 400;                /* 2. O peso (400 = regular) */
-
 }
 
 /* 4. GRUPOS DE INPUT (LABEL + CAMPO + ÍCONE) */
@@ -80,9 +83,8 @@ body::before {
     margin-bottom: 5px;
     font-size: 14px;
     color: #333333;
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-weight: 400;  
-
 }
 
 .input-field {
@@ -122,10 +124,8 @@ body::before {
     color: #810303;
     text-decoration: none;
     margin-top: 5px;
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-weight: 600;  
-
-
 }
 
 /* 5. OPÇÕES DE ENTRADA */
@@ -202,9 +202,17 @@ body::before {
 }
 
 
-/* --- NOVOS ESTILOS PARA OS MÉTODOS DE LOGIN --- */
+/* --- NOVOS ESTILOS PARA OS MÉTODOS DE LOGIN (MOVIMENTO CORRIGIDO) --- */
+.subtitulo-faceid {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px; 
+    font-size: 14px;
+    font-family: 'Inter', sans-serif; 
+    font-weight: 400;  
+}
 
-/* Estilo para a caixa de scan (baseado na imagem 'image_b0d09a.png') */
+/* Estilo para a caixa de scan (baseado na imagem 'image_a511b9.png') */
 .scan-placeholder {
     width: 100%;
     max-width: 250px; /* Tamanho máximo da caixa */
@@ -252,15 +260,20 @@ body::before {
 /* CÓDIGO RESPONSIVO         */
 /* ======================================= */
 @media (max-width: 768px) {
+
+    /* 1. Manda o body centralizar o cartão na horizontal */
     body {
         justify-content: center;
     }
+
+    /* 2. Esconde a forma diagonal branca, que não cabe no celular */
     body::before {
         display: none;
     }
+
+    /* 3. Remove a margem fixa de 800px e centraliza o cartão */
     .login-card {
-        margin-left: 0; 
-        width: 90%; 
+        margin-left: 0; /* Remove a margem de 800px */
+        width: 90%; /* Ocupa 90% da tela */
     }
-    
 }
