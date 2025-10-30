@@ -91,6 +91,7 @@ body::before {
     position: relative; /* Para posicionar o ícone dentro dele */
 }
 
+/* Estilo para <input> e <InputMask> */
 .input-field input {
     width: 100%;
     padding: 10px 40px 10px 5px; /* Espaço para o ícone à direita */
@@ -98,6 +99,7 @@ body::before {
     border-bottom: 2px solid #ccc;
     font-size: 16px;
     transition: border-color 0.3s;
+    font-family: 'Inter', sans-serif; /* Garante que a máscara use a fonte */
 }
 
 .input-field input:focus {
@@ -194,6 +196,7 @@ body::before {
     font-family: 'Inter', sans-serif;
 }
 
+/* Estiliza o <Link> do React Router */
 .link-cadastro a {
     color: #630527;
     font-weight: 700;
@@ -202,15 +205,7 @@ body::before {
 }
 
 
-/* --- NOVOS ESTILOS PARA OS MÉTODOS DE LOGIN (MOVIMENTO CORRIGIDO) --- */
-.subtitulo-faceid {
-    text-align: center;
-    color: #000000;
-    margin-bottom: 20px; 
-    font-size: 14px;
-    font-family: 'Inter', sans-serif; 
-    font-weight: 400;  
-}
+/* --- NOVOS ESTILOS PARA OS MÉTODOS DE LOGIN --- */
 
 /* Estilo para a caixa de scan (baseado na imagem 'image_a511b9.png') */
 .scan-placeholder {
@@ -253,6 +248,39 @@ body::before {
 .btn-faceid-voltar {
     width: 100%;
     margin-top: 15px; /* Espaço acima do botão Voltar */
+}
+
+
+/* --- NOVOS ESTILOS PARA MENSAGENS DE ALERTA --- */
+
+/* Mensagem de Erro (Vermelha) */
+.mensagem-alerta {
+    background-color: #ffebee; /* Fundo vermelho-claro */
+    color: #c62828; /* Texto vermelho-escuro */
+    border: 1px solid #c62828;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 20px; 
+    word-wrap: break-word;
+}
+
+/* Mensagem de Sucesso (Verde) */
+.mensagem-sucesso {
+    background-color: #e8f5e9; /* Fundo verde-claro */
+    color: #2e7d32; /* Texto verde-escuro */
+    border: 1px solid #2e7d32;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 20px; 
+    word-wrap: break-word;
 }
 
 
