@@ -1,33 +1,56 @@
-import { Link } from 'react-router-dom';      // Para o link "Cadastre-se"
-import InputMask from 'react-input-mask';   // Para a máscara de CPF
-import React, { useState } from 'react';
-
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 import '../styles/Login.css';
+import * as faceapi from 'face-api.js';
 
 function Login() {
-    
     const [senhaVisivel, setSenhaVisivel] = useState(false);
-    const [metodoLogin, setMetodoLogin] = useState('padrao'); 
-    
-    // Estados para os campos
+    const [metodoLogin, setMetodoLogin] = useState('padrao');
     const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
     const [cpf, setCpf] = useState('');
-    
-    // Estado para a mensagem de alerta
     const [mensagem, setMensagem] = useState('');
+    const [faceIdStatus, setFaceIdStatus] = useState('Aguardando');
+    const videoRef = useRef(null); 
+    const canvasRef = useRef(null); 
+    const intervalRef = useRef(null); 
 
     function toggleVisibilidadeSenha() {
-        setSenhaVisivel(!senhaVisivel); 
+        setSenhaVisivel(!senhaVisivel);
     }
 
+    // (O seu código de validação de CPF e FaceID permanece igual)
+    function validarCpf(cpf) {
+        // ... (seu código de validação)
+    }
+    async function autenticarFaceID() {
+        // ... (seu código de Face ID)
+    }
+    const loadModels = () => {
+         // ... (seu código de Face ID)
+    };
+    const startVideo = () => {
+         // ... (seu código de Face ID)
+    };
+    const handlePlay = () => {
+         // ... (seu código de Face ID)
+    };
+    useEffect(() => {
+         // ... (seu código de Face ID)
+    }, []);
+     useEffect(() => {
+         // ... (seu código de Face ID)
+    }, [metodoLogin]);
+
+
+    // --- MUDANÇA 1: ATIVAR ALERTAS NO SUBMIT ---
     function handleLoginSubmit(event) {
-        event.preventDefault(); 
+        event.preventDefault();
         setMensagem(''); // Limpa mensagens antigas
-        
+
         if (metodoLogin === 'padrao') {
             console.log("A tentar logar com Nome/Senha...");
-            // Simulação de erro:
             if (nome === '' || senha === '') {
                 setMensagem('Erro: Preencha todos os campos.');
             } else if (senha.length < 6) {
@@ -35,20 +58,41 @@ function Login() {
             } else {
                 setMensagem('Erro: Nome de usuário ou senha inválidos.');
             }
+        
         } else if (metodoLogin === 'cpf') {
             console.log("A tentar logar com CPF:", cpf);
-            setMensagem('Erro: CPF não encontrado.');
+            if (cpf.includes('_') || cpf === '') {
+                 setMensagem('Erro: Por favor, preencha um CPF válido.');
+            } else {
+                setMensagem('Erro: CPF não encontrado.');
+            }
+
         } else if (metodoLogin === 'faceid') {
             console.log("A tentar logar com FaceID...");
-            setMensagem('Erro: Rosto não reconhecido.');
+            // A sua lógica de 'autenticarFaceID' deve tratar o 'setMensagem'
+            autenticarFaceID();
         }
     }
 
-    // Função para limpar a mensagem ao trocar de método
+    // --- MUDANÇA 2: FUNÇÃO PARA LIMPAR ALERTAS AO MUDAR DE MÉTODO ---
     function mudarMetodo(novoMetodo) {
         setMetodoLogin(novoMetodo);
-        setMensagem(''); 
+        setMensagem(''); // Limpa qualquer alerta ao trocar de método
+        
+        // Se o novo método for FaceID, inicia a câmera
+        if (novoMetodo === 'faceid') {
+            startVideo();
+        } else {
+            // Se for outro método, para o vídeo (se estiver a ser executado)
+            if (videoRef.current && videoRef.current.srcObject) {
+                videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+            }
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
+        }
     }
+
 
     return (
         <div className="login-card">
@@ -102,6 +146,7 @@ function Login() {
                     <div className="input-group">
                         <label htmlFor="cpf">CPF</label>
                         <div className="input-field">
+                            {/* O seu Login.jsx já tinha esta máscara, o que é ótimo! */}
                             <InputMask 
                                 mask="999.999.999-99" 
                                 maskChar={null}
@@ -115,10 +160,13 @@ function Login() {
                     </div>
                 )}
 
-                {/* --- MODO FACEID (Tela Limpa) --- */}
+                {/* --- MODO FACEID (Tela Limpa com Câmera) --- */}
                 {metodoLogin === 'faceid' && (
-                    <div className="scan-placeholder">
-                        <span className="camera-text">CÂMERA</span>
+                    <div className="scan-placeholder" style={{ position: 'relative' }}>
+                        {/* A sua lógica de vídeo/canvas do Face ID */}
+                        <video ref={videoRef} id="video" width="230" height="230" autoPlay muted playsInline></video>
+                        <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0 }} />
+                        <span className="camera-text">{faceIdStatus}</span>
                     </div>
                 )}
                 
@@ -132,6 +180,7 @@ function Login() {
                     <>
                         <div className="opcoes-entrada">
                             <p>Opções de entrada:</p>
+                            {/* --- MUDANÇA 3: Usar 'mudarMetodo' nos onClick --- */}
                             <div className="botoes-opcoes">
                                 <button type="button" className="btn-opcao" onClick={() => mudarMetodo('faceid')}>
                                     FaceID

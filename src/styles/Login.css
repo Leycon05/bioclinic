@@ -9,7 +9,6 @@ body {
     font-family: 'Inter', sans-serif; /* Adicionado fallback */
     color: #333;
     
-   
     /* --- CORREÇÃO CRÍTICA DO CAMINHO --- */
     /* 1. Mova 'fundo1.svg' para a pasta 'public/' 
        2. Este caminho url('/fundo1.svg') vai funcionar.
@@ -21,6 +20,7 @@ body {
     /* Layout para desktop (como você queria) */
     display: flex;
     align-items: center;
+    justify-content: flex-end; /* Adicionado para mover o card para a direita */
     min-height: 100vh;
     padding: 5px;
     
@@ -52,7 +52,8 @@ body::before {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 350px;
-    margin-left: 800px;
+    margin: 0px; /* Centraliza o card */
+    margin-right: 200px; /* Centraliza o card */
 }
 
 .login-form h1 {
@@ -204,7 +205,6 @@ body::before {
     font-family: 'Inter', sans-serif;
 }
 
-
 /* --- NOVOS ESTILOS PARA OS MÉTODOS DE LOGIN --- */
 
 /* Estilo para a caixa de scan (baseado na imagem 'image_a511b9.png') */
@@ -250,7 +250,6 @@ body::before {
     margin-top: 15px; /* Espaço acima do botão Voltar */
 }
 
-
 /* --- NOVOS ESTILOS PARA MENSAGENS DE ALERTA --- */
 
 /* Mensagem de Erro (Vermelha) */
@@ -282,7 +281,6 @@ body::before {
     margin-bottom: 20px; 
     word-wrap: break-word;
 }
-
 
 /* ======================================= */
 /* CÓDIGO RESPONSIVO         */

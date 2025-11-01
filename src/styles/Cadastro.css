@@ -33,4 +33,12 @@
     word-wrap: break-word;
 }
 
+.mensagem-erro {
+    color: #e74c3c; /* Vermelho mais forte */
+    font-size: 0.85em;
+    margin-top: 5px;
+    text-align: left;
+    width: 100%;
+}
+
 
