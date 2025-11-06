@@ -1,0 +1,59 @@
+/* O FaceSuccess.jsx já importa o Login.css, 
+   por isso só precisamos de adicionar os estilos novos. */
+
+/* Título "Face ID" */
+.faceid-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    color: #630527; 
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Container para o ícone de sucesso e a mensagem */
+.faceid-success-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px; 
+    margin-bottom: 40px; 
+}
+
+/* Ícone de check (sucesso) */
+.face-icon-success {
+    font-size: 100px; /* Tamanho grande */
+    color: #2e7d32; /* Cor verde (sucesso) */
+    margin-bottom: 25px;
+}
+
+/* Texto de sucesso */
+.faceid-success-message {
+    color: #2e7d32; /* Verde escuro */
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Botão "ENTRAR" do Face ID */
+.btn-faceid-entrar {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    background-color: #2e7d32; /* Fundo Verde */
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;  
+    margin-top: 15px;
+}
+.btn-faceid-entrar:hover {
+    background-color: #388e3c; /* Verde um pouco mais claro */
+}
+
+/* O estilo para o link foi removido */

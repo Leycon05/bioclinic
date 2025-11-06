@@ -1,0 +1,47 @@
+/* O FaceError.jsx já importa o Login.css, 
+   por isso só precisamos de adicionar os estilos novos. */
+
+/* Título "Face ID" */
+.faceid-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    color: #630527; /* Cor do seu login */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Container para o ícone de erro e a mensagem */
+.faceid-error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px; 
+    margin-bottom: 40px; 
+}
+
+/* Ícone de rosto (da imagem) */
+.face-icon-error {
+    font-size: 100px; /* Tamanho grande */
+    color: #630527; /* Cor do título (como na imagem) */
+    margin-bottom: 25px;
+}
+
+/* Texto de erro */
+.faceid-error-message {
+    color: #c62828; /* Vermelho escuro */
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Espaçamento para o link "Tentar de outra forma" */
+.link-tentar-outra-forma {
+    margin-top: 20px; /* Adiciona espaço acima do link */
+    text-align: center; /* Garante que está centrado */
+}
+
+/* O botão "Tentar Novamente" já usa os estilos .btn-opcao e .btn-voltar 
+   do Login.css (que foi importado no .jsx) */
