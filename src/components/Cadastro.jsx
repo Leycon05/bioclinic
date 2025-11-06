@@ -123,7 +123,7 @@ function Cadastro() {
                     <label htmlFor="cpf">CPF</label>
                     <div className="input-field">
                         <input 
-                            type="text" 
+                            type="number" 
                             id="cpf" 
                             name="cpf" 
                             required 

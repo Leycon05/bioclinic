@@ -4,17 +4,13 @@
 /* --- NOVOS ESTILOS PARA MENSAGENS DE ALERTA --- */
 
 /* Mensagem de Erro (Vermelha) */
-.mensagem-alerta {
-    background-color: #ffebee; /* Fundo vermelho-claro */
+.mensagem-erro {
     color: #c62828; /* Texto vermelho-escuro */
-    border: 1px solid #c62828;
-    padding: 10px;
-    border-radius: 5px;
     text-align: center;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 14px;
-    margin-bottom: 20px; 
+    margin-bottom: 10px; 
     word-wrap: break-word;
 }
 
