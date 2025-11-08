@@ -1,46 +1,37 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Importa Link e useNavigate
+import CancelSVG from '../assets/imagens/Cancel.svg'; // Importa o SVG de cancelamento
 
-// Reutiliza o estilo do Login para o cartão e botões
+// Reutiliza o fundo do Login e estilos gerais de card
 import '../styles/Login.css';
-// Adiciona os estilos específicos desta tela
+// Adiciona os estilos específicos desta tela de erro
 import '../styles/FaceError.css';
 
 function FaceError() {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Hook para navegação
 
-    function handleTentarNovamente() {
-        // No futuro, isto reiniciaria o scan.
-        // Por agora, volta para a tela de login real (que está em /login)
-        navigate('/login'); 
+    function handleVoltar() {
+        navigate('/login'); // Volta para a tela de login, onde o FaceID pode ser tentado novamente.
     }
 
     return (
-        // Reutilizamos o .login-card para manter o mesmo visual
-        <div className="login-card"> 
+        <div className="face-error-card"> 
             <form className="login-form">
                 
-                <h1 className="faceid-title">Face ID</h1>
-
                 {/* O container de erro (ícone e texto) */}
                 <div className="faceid-error-container">
-                    <i className="fa-solid fa-face-frown-open face-icon-error"></i>
-                    <p className="faceid-error-message">Rosto não reconhecido</p>
+                    <img src={CancelSVG} alt="Cancel" className="face-icon-error" />
+                    <p className="faceid-error-message">FaceID não identificado. Tente novamente!</p>
                 </div>
 
-                {/* Botão "TENTAR NOVAMENTE" (reutilizando estilos do Login.css) */}
+                {/* Botão de "Voltar" para a tela de Login */}
                 <button 
                     type="button" 
-                    className="btn-opcao btn-voltar btn-faceid-voltar" 
-                    onClick={handleTentarNovamente}
+                    className="btn-opcao btn-voltar btn-error-voltar" /* Reutiliza estilos e adiciona um específico */
+                    onClick={handleVoltar}
                 >
-                    TENTAR NOVAMENTE
+                    Voltar
                 </button>
-
-                {/* O link "Tentar de outra forma" */}
-                <p className="link-cadastro link-tentar-outra-forma">
-                    Não é você? <Link to="/login">Tentar de outra forma</Link>
-                </p>
 
             </form>
         </div>

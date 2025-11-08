@@ -39,7 +39,7 @@ body::before {
     background-color: #ffffff;
     transform: skewX(-15deg); 
     transform-origin: top left;
-    z-index: 0; /* Fica atrás do cartão de login */
+    z-index: 0; /* Fica atrás do pseudo-elemento */
 }
 
 /* 3. O CARTÃO DE LOGIN (Seu estilo "perfeito") */
@@ -53,8 +53,14 @@ body::before {
     width: 100%;
     max-width: 350px;
     margin: 0px; /* Centraliza o card */
-    margin-right: 200px; /* Centraliza o card */
+    margin-right: 200px; /* Adicionado para mover o card para a direita */
     display: block !important; /* Força a exibição do card */
+}
+
+.login-form {
+    width: 100%; /* Permite que o formulário preencha o card */
+    height: 100%;
+    padding: 0; /* Removendo padding do form para que o card o controle */
 }
 
 .login-form h1 {

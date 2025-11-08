@@ -1,14 +1,28 @@
 /* O FaceSuccess.jsx já importa o Login.css, 
    por isso só precisamos de adicionar os estilos novos. */
 
-/* Título "Face ID" */
-.faceid-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 32px;
-    color: #630527; 
-    text-align: center;
-    margin-bottom: 20px;
+/* Novo estilo para o cartão de sucesso */
+.face-success-card {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 75%; /* Movido mais para a direita */
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 400px; /* Largura máxima conforme a especificação */
+    aspect-ratio: 1 / 1; /* Para manter a proporção quadrada */
+    background-color: #fff; 
+    border: 5px solid #630527; /* Borda escura */
+    border-radius: 20px; /* Cantos arredondados */
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    z-index: 1;
+    display: flex; /* Para centralizar o conteúdo interno */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px; /* Adicionado padding interno */
+    height: 450px;
+    width: 350px;
 }
 
 /* Container para o ícone de sucesso e a mensagem */
@@ -17,24 +31,29 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 30px; 
-    margin-bottom: 40px; 
+    margin-top: 0; /* Ajustado para centralizar com o flexbox do formulário */
+    margin-bottom: 0; /* Ajustado para centralizar com o flexbox do formulário */
 }
 
 /* Ícone de check (sucesso) */
 .face-icon-success {
-    font-size: 100px; /* Tamanho grande */
-    color: #2e7d32; /* Cor verde (sucesso) */
-    margin-bottom: 25px;
+    width: 249px; /* Largura conforme a especificação */
+    height: 250px; /* Altura conforme a especificação */
+    margin-bottom: 30px; /* Espaço entre o ícone e o texto */
 }
 
 /* Texto de sucesso */
 .faceid-success-message {
-    color: #2e7d32; /* Verde escuro */
+    /* position: absolute; */ /* Removido: Usaremos flexbox para posicionamento */
+    width: 100%; /* Permite que o texto ocupe a largura total disponível */
+    max-width: 400px; /* Limita a largura para não exceder o card */
     font-family: 'Inter', sans-serif;
+    font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 32px;
+    line-height: 39px;
     text-align: center;
+    color: #000000;
 }
 
 /* Botão "ENTRAR" do Face ID */

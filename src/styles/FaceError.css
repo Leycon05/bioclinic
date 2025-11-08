@@ -1,14 +1,29 @@
-/* O FaceError.jsx já importa o Login.css, 
+/* O FaceError.jsx já importa o Login.css,
    por isso só precisamos de adicionar os estilos novos. */
 
-/* Título "Face ID" */
-.faceid-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 32px;
-    color: #630527; /* Cor do seu login */
-    text-align: center;
-    margin-bottom: 20px;
+/* Estilo para o cartão de erro (similar ao de sucesso) */
+.face-error-card {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 75%; /* Ajustado para a mesma posição do card de sucesso */
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 400px; /* Largura máxima conforme a especificação */
+    aspect-ratio: 1 / 1; /* Para manter a proporção quadrada */
+    background-color: #fff;
+    border: 5px solid #630527; /* Borda vermelha para erro */
+    box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.25); /* Sombra vermelha */
+    border-radius: 20px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    height: 450px;
+    width: 350px;
+
 }
 
 /* Container para o ícone de erro e a mensagem */
@@ -17,24 +32,38 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 30px; 
-    margin-bottom: 40px; 
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
-/* Ícone de rosto (da imagem) */
+/* Ícone de cancelamento (erro) */
 .face-icon-error {
-    font-size: 100px; /* Tamanho grande */
-    color: #630527; /* Cor do título (como na imagem) */
-    margin-bottom: 25px;
+    width: 249px; /* Largura conforme a especificação */
+    height: 250px; /* Altura conforme a especificação */
+    margin-bottom: 30px; /* Espaço entre o ícone e o texto */
 }
 
 /* Texto de erro */
 .faceid-error-message {
-    color: #c62828; /* Vermelho escuro */
+    width: 100%;
+    max-width: 400px;
     font-family: 'Inter', sans-serif;
+    font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 22px;
+    line-height: 39px;
     text-align: center;
+    color: #000000; /* Cor vermelha para o texto de erro */
+}
+
+/* Estilo para o botão "Voltar" da tela de erro */
+.btn-error-voltar {
+    margin-top: 20px; /* Espaçamento acima do botão */
+    width: 100%; /* Ocupa a largura total do container */
+    max-width: 250px; /* Limita a largura, similar a outros botões */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Espaçamento para o link "Tentar de outra forma" */
@@ -43,5 +72,5 @@
     text-align: center; /* Garante que está centrado */
 }
 
-/* O botão "Tentar Novamente" já usa os estilos .btn-opcao e .btn-voltar 
+/* O botão "Tentar Novamente" já usa os estilos .btn-opcao e .btn-voltar
    do Login.css (que foi importado no .jsx) */
