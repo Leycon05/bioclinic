@@ -4,12 +4,13 @@ import Cadastro from './components/Cadastro.jsx' // Importar a nova tela
 import FaceSuccess from './components/FaceSuccess.jsx' // 1. Importar a nova tela
 import FaceError from './components/FaceError.jsx' // 1. Importar a nova tela
 import PermissaoLocalizacao from './components/PermissaoLocalizacao.jsx' // 1. Importar a nova tela
+import RoutesList from './components/RoutesList.jsx'; // Importar a nova tela de lista de rotas
 
 function App() {
   return (
     <Routes>
       {/* A URL "/" (raiz) mostra a tela de Login */}
-      <Route path="/" element={<Login />} /> 
+      <Route path="/" element={<RoutesList />} /> 
      <Route path="/login" element={<Login />} /> 
 
       
@@ -21,6 +22,7 @@ function App() {
       <Route path="/face-erro" element={<FaceError />} />
 
       <Route path="/permissao-localizacao" element={<PermissaoLocalizacao />} />
+      <Route path="/routes-list" element={<RoutesList />} /> {/* Nova rota para listar telas */}
     </Routes>
   );
 }

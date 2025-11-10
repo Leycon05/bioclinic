@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import LocationSVG from '../assets/imagens/Location.svg'; // Importa o SVG de localização
 
 // Vamos re-utilizar o fundo e o cartão do Login
 import '../styles/Login.css';
@@ -40,13 +41,12 @@ function PermissaoLocalizacao() {
 
                 {/* O container do ícone (baseado na imagem) */}
                 <div className="permissao-icon-container">
-                    <i className="fa-solid fa-map-location-dot permissao-icon"></i>
+                    <img src={LocationSVG} alt="Location" className="permissao-icon" />
                 </div>
 
                 {/* O texto explicativo (baseado na imagem) */}
                 <p className="permissao-texto">
-                    Para uma melhor experiência, precisamos da sua permissão para acessar sua localização.
-                </p>
+                Para oferecer uma experiência personalizada e mostrar serviços próximos a você, precisamos acessar sua localização.                 </p>
 
                 {/* Os dois botões (baseado na imagem) */}
                 <div className="permissao-botoes-container">

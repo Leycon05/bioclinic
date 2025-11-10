@@ -37,4 +37,11 @@
     width: 100%;
 }
 
+@media (max-width: 768px) {
+    .mensagem-erro,
+    .mensagem-sucesso {
+        font-size: 12px; /* Reduz o tamanho da fonte das mensagens em telas menores */
+    }
+}
+
 

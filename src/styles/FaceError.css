@@ -74,3 +74,33 @@
 
 /* O botão "Tentar Novamente" já usa os estilos .btn-opcao e .btn-voltar
    do Login.css (que foi importado no .jsx) */
+
+/* ======================================= */
+/* CÓDIGO RESPONSIVO         */
+/* ======================================= */
+@media (max-width: 768px) {
+    .face-error-card {
+        width: 90%; /* Ajusta a largura do card em telas menores */
+        height: auto; /* Permite que a altura se ajuste */
+        padding: 10px; /* Reduz o padding */
+        left: 50%; /* Centraliza o card horizontalmente */
+        transform: translate(-50%, -50%); /* Garante centralização */
+    }
+
+    .face-icon-error {
+        width: 150px; /* Reduz o tamanho do ícone */
+        height: 150px;
+        margin-bottom: 20px;
+    }
+
+    .faceid-error-message {
+        font-size: 24px; /* Reduz o tamanho da fonte da mensagem */
+        line-height: 30px;
+    }
+
+    .btn-error-voltar {
+        padding: 12px; /* Ajusta o padding do botão */
+        font-size: 13px;
+        max-width: 200px; /* Reduz a largura máxima do botão */
+    }
+}

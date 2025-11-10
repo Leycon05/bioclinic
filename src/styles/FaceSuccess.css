@@ -75,4 +75,26 @@
     background-color: #388e3c; /* Verde um pouco mais claro */
 }
 
+/* ======================================= */
+/* CÓDIGO RESPONSIVO         */
+/* ======================================= */
+@media (max-width: 768px) {
+    .face-success-card {
+        width: 90%; /* Ajusta a largura do card em telas menores */
+        height: auto; /* Permite que a altura se ajuste */
+        padding: 10px; /* Reduz o padding */
+    }
+
+    .face-icon-success {
+        width: 150px; /* Reduz o tamanho do ícone */
+        height: 150px;
+        margin-bottom: 20px;
+    }
+
+    .faceid-success-message {
+        font-size: 24px; /* Reduz o tamanho da fonte da mensagem */
+        line-height: 30px;
+    }
+}
+
 /* O estilo para o link foi removido */

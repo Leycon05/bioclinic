@@ -180,7 +180,7 @@ function Cadastro() {
                 <button type="submit" className="btn-entrar">CADASTRAR</button>
 
                 <p className="link-cadastro">
-                    Já tem uma conta? <Link to="/">Faça login aqui</Link>
+                    Já tem uma conta? <Link to="/login">Faça login aqui</Link>
                 </p>
 
             </form>

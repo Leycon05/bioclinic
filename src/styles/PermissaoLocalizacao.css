@@ -19,8 +19,8 @@
 
 /* Ícone de Mapa (da imagem) */
 .permissao-icon {
-    font-size: 80px; /* Tamanho grande */
-    color: #007bff; /* Azul, como na imagem */
+    width: 150px; /* Definindo a largura para o SVG */
+    height: 150px; /* Definindo a altura para o SVG */
 }
 
 /* Texto explicativo (da imagem) */
@@ -41,13 +41,12 @@
     gap: 15px; /* Espaço entre os botões */
 }
 
-/* Botão "PERMITIR" (Azul) */
 .btn-permitir {
     width: 100%;
     padding: 15px;
     border: none;
     border-radius: 30px;
-    background-color: #007bff; /* Azul (da imagem) */
+    background-color: #b42864; 
     color: #FFFFFF;
     font-size: 14px;
     cursor: pointer;
@@ -56,17 +55,16 @@
     transition: background-color 0.3s;
 }
 .btn-permitir:hover {
-    background-color: #0056b3; /* Azul mais escuro */
+    background-color: #630527; 
 }
 
-/* Botão "Agora não" (Cinza claro) */
 .btn-agora-nao {
     width: 100%;
     padding: 15px;
-    border: 1px solid #dee2e6; /* Borda cinza clara */
+    border: 1px solid #630527; 
     border-radius: 30px;
-    background-color: #f8f9fa; /* Fundo cinza/branco */
-    color: #6c757d; /* Texto cinza */
+    background-color: #b42864; 
+    color: #ffff; /* Texto cinza */
     font-size: 14px;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
@@ -74,5 +72,35 @@
     transition: background-color 0.3s;
 }
 .btn-agora-nao:hover {
-    background-color: #e2e6ea; /* Cinza um pouco mais escuro */
+    background-color: #630527; 
+}
+
+/* ======================================= */
+/* CÓDIGO RESPONSIVO         */
+/* ======================================= */
+@media (max-width: 768px) {
+    .permissao-title {
+        font-size: 20px; /* Reduz o tamanho do título em telas menores */
+        margin-bottom: 20px;
+    }
+
+    .permissao-icon {
+        width: 100px; /* Reduz o tamanho do ícone */
+        height: 100px;
+    }
+
+    .permissao-texto {
+        font-size: 14px; /* Reduz o tamanho da fonte do texto explicativo */
+        margin-bottom: 25px;
+    }
+
+    .permissao-botoes-container {
+        flex-direction: column; /* Garante que os botões se empilhem */
+        gap: 10px;
+    }
+
+    .btn-permitir, .btn-agora-nao {
+        padding: 12px; /* Ajusta o padding dos botões */
+        font-size: 13px;
+    }
 }
