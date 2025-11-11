@@ -6,6 +6,7 @@ import CancelSVG from '../assets/imagens/Cancel.svg'; // Importa o SVG de cancel
 import '../styles/Login.css';
 // Adiciona os estilos específicos desta tela de erro
 import '../styles/FaceError.css';
+import '../styles/SharedBackground.css'; // Importar o novo arquivo de fundo compartilhado
 
 function FaceError() {
     const navigate = useNavigate(); // Hook para navegação
@@ -15,25 +16,27 @@ function FaceError() {
     }
 
     return (
-        <div className="face-error-card"> 
-            <form className="login-form">
-                
-                {/* O container de erro (ícone e texto) */}
-                <div className="faceid-error-container">
-                    <img src={CancelSVG} alt="Cancel" className="face-icon-error" />
-                    <p className="faceid-error-message">FaceID não identificado. Tente novamente!</p>
-                </div>
+        <div className="background-container">
+            <div className="face-error-card"> 
+                <form className="login-form">
+                    
+                    {/* O container de erro (ícone e texto) */}
+                    <div className="faceid-error-container">
+                        <img src={CancelSVG} alt="Cancel" className="face-icon-error" />
+                        <p className="faceid-error-message">FaceID não identificado. Tente novamente!</p>
+                    </div>
 
-                {/* Botão de "Voltar" para a tela de Login */}
-                <button 
-                    type="button" 
-                    className="btn-opcao btn-voltar btn-error-voltar" /* Reutiliza estilos e adiciona um específico */
-                    onClick={handleVoltar}
-                >
-                    Voltar
-                </button>
+                    {/* Botão de "Voltar" para a tela de Login */}
+                    <button 
+                        type="button" 
+                        className="btn-opcao btn-voltar btn-error-voltar" /* Reutiliza estilos e adiciona um específico */
+                        onClick={handleVoltar}
+                    >
+                        Voltar
+                    </button>
 
-            </form>
+                </form>
+            </div>
         </div>
     );
 }

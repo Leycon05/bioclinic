@@ -5,6 +5,7 @@ import FaceSuccess from './components/FaceSuccess.jsx' // 1. Importar a nova tel
 import FaceError from './components/FaceError.jsx' // 1. Importar a nova tela
 import PermissaoLocalizacao from './components/PermissaoLocalizacao.jsx' // 1. Importar a nova tela
 import RoutesList from './components/RoutesList.jsx'; // Importar a nova tela de lista de rotas
+import SobreAClinicaServicos from './components/SobreAClinicaServicos.jsx'; // Importar a nova tela consolidada
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
 
       <Route path="/permissao-localizacao" element={<PermissaoLocalizacao />} />
       <Route path="/routes-list" element={<RoutesList />} /> {/* Nova rota para listar telas */}
+      <Route path="/sobre-a-clinica-servicos" element={<SobreAClinicaServicos />} /> {/* Nova rota para a tela consolidada */}
     </Routes>
   );
 }

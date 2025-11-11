@@ -9,37 +9,6 @@ body {
     font-family: 'Inter', sans-serif; /* Adicionado fallback */
     color: #333;
     
-    /* --- CORREÇÃO CRÍTICA DO CAMINHO --- */
-    /* 1. Mova 'fundo1.svg' para a pasta 'public/' 
-       2. Este caminho url('/fundo1.svg') vai funcionar.
-    */
-    background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('/src/assets/imagens/fundo1.svg');
-    background-size: cover;
-    background-position: center;
-    
-    /* Layout para desktop (como você queria) */
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* Adicionado para mover o card para a direita */
-    min-height: 100vh;
-    padding: 5px;
-    
-    /* Isso esconde a barra de rolagem horizontal que seu layout cria */
-    overflow-x: hidden;
-}
-
-/* 2. O EFEITO DIAGONAL BRANCO (Seu estilo "perfeito") */
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 80%;
-    width: 80%; 
-    height: 100%;
-    background-color: #ffffff;
-    transform: skewX(-15deg); 
-    transform-origin: top left;
-    z-index: 0; /* Fica atrás do pseudo-elemento */
 }
 
 /* 3. O CARTÃO DE LOGIN (Seu estilo "perfeito") */

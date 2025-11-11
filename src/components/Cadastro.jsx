@@ -49,6 +49,7 @@ const validarCPF = (cpf) => {
 import '../styles/Login.css';
 // E podemos adicionar estilos específicos se precisarmos
 import '../styles/Cadastro.css';
+import '../styles/SharedBackground.css'; // Importar o novo arquivo de fundo compartilhado
 
 function Cadastro() {
     
@@ -104,86 +105,88 @@ function Cadastro() {
     };
 
     return (
-        <div className="login-card"> {/* Re-utilizando a classe do Login */}
-            <form className="login-form" onSubmit={handleSubmit}> {/* Re-utilizando a classe do Login */}
-                
-                <h1>Cadastro</h1>
-                <p className="subtitulo">Crie sua conta para continuar.</p>
+        <div className="background-container">
+            <div className="login-card"> {/* Re-utilizando a classe do Login */}
+                <form className="login-form" onSubmit={handleSubmit}> {/* Re-utilizando a classe do Login */}
+                    
+                    <h1>Cadastro</h1>
+                    <p className="subtitulo">Crie sua conta para continuar.</p>
 
-                <div className="input-group">
-                    <label htmlFor="nome">Nome completo</label>
-                    <div className="input-field">
-                        <input type="text" id="nome" name="nome" required />
-                        <i className="fa-solid fa-user icon"></i>
+                    <div className="input-group">
+                        <label htmlFor="nome">Nome completo</label>
+                        <div className="input-field">
+                            <input type="text" id="nome" name="nome" required />
+                            <i className="fa-solid fa-user icon"></i>
+                        </div>
                     </div>
-                </div>
 
-                {/* --- MUDANÇA AQUI --- */}
-                <div className="input-group">
-                    <label htmlFor="cpf">CPF</label>
-                    <div className="input-field">
-                        <input 
-                            type="number" 
-                            id="cpf" 
-                            name="cpf" 
-                            required 
-                            placeholder="000.000.000-00" 
-                            value={cpf}
-                            onChange={handleCpfChange}
-                        />
-                        <i className="fa-solid fa-id-card icon"></i>
+                    {/* --- MUDANÇA AQUI --- */}
+                    <div className="input-group">
+                        <label htmlFor="cpf">CPF</label>
+                        <div className="input-field">
+                            <input 
+                                type="number" 
+                                id="cpf" 
+                                name="cpf" 
+                                required 
+                                placeholder="000.000.000-00" 
+                                value={cpf}
+                                onChange={handleCpfChange}
+                            />
+                            <i className="fa-solid fa-id-card icon"></i>
+                        </div>
+                        {cpfInvalido && <p className="mensagem-erro">CPF inválido. Verifique o número.</p>}
                     </div>
-                    {cpfInvalido && <p className="mensagem-erro">CPF inválido. Verifique o número.</p>}
-                </div>
-                {/* --- FIM DA MUDANÇA --- */}
+                    {/* --- FIM DA MUDANÇA --- */}
 
-                <div className="input-group">
-                    <label htmlFor="senha">Criar Senha</label>
-                    <div className="input-field">
-                        <input 
-                            type={senhaVisivel ? "text" : "password"} 
-                            id="senha" 
-                            name="senha" 
-                            required 
-                            value={senha}
-                            onChange={handleSenhaChange}
-                        />
-                        <i 
-                            className={senhaVisivel ? "fa-solid fa-eye-slash icon" : "fa-solid fa-eye icon"}
-                            onClick={() => setSenhaVisivel(!senhaVisivel)}
-                            style={{ cursor: 'pointer' }}
-                        ></i>
+                    <div className="input-group">
+                        <label htmlFor="senha">Criar Senha</label>
+                        <div className="input-field">
+                            <input 
+                                type={senhaVisivel ? "text" : "password"} 
+                                id="senha" 
+                                name="senha" 
+                                required 
+                                value={senha}
+                                onChange={handleSenhaChange}
+                            />
+                            <i 
+                                className={senhaVisivel ? "fa-solid fa-eye-slash icon" : "fa-solid fa-eye icon"}
+                                onClick={() => setSenhaVisivel(!senhaVisivel)}
+                                style={{ cursor: 'pointer' }}
+                            ></i>
+                        </div>
+                        {erroSenha && <p className="mensagem-erro">{erroSenha}</p>}
                     </div>
-                    {erroSenha && <p className="mensagem-erro">{erroSenha}</p>}
-                </div>
 
-                <div className="input-group">
-                    <label htmlFor="confirmaSenha">Confirmar Senha</label>
-                    <div className="input-field">
-                        <input 
-                            type={confirmaSenhaVisivel ? "text" : "password"} 
-                            id="confirmaSenha" 
-                            name="confirmaSenha" 
-                            required 
-                            value={confirmaSenha}
-                            onChange={handleConfirmaSenhaChange}
-                        />
-                        <i 
-                            className={confirmaSenhaVisivel ? "fa-solid fa-eye-slash icon" : "fa-solid fa-eye icon"}
-                            onClick={() => setConfirmaSenhaVisivel(!confirmaSenhaVisivel)}
-                            style={{ cursor: 'pointer' }}
-                        ></i>
+                    <div className="input-group">
+                        <label htmlFor="confirmaSenha">Confirmar Senha</label>
+                        <div className="input-field">
+                            <input 
+                                type={confirmaSenhaVisivel ? "text" : "password"} 
+                                id="confirmaSenha" 
+                                name="confirmaSenha" 
+                                required 
+                                value={confirmaSenha}
+                                onChange={handleConfirmaSenhaChange}
+                            />
+                            <i 
+                                className={confirmaSenhaVisivel ? "fa-solid fa-eye-slash icon" : "fa-solid fa-eye icon"}
+                                onClick={() => setConfirmaSenhaVisivel(!confirmaSenhaVisivel)}
+                                style={{ cursor: 'pointer' }}
+                            ></i>
+                        </div>
+                        {erroConfirmaSenha && <p className="mensagem-erro">{erroConfirmaSenha}</p>}
                     </div>
-                    {erroConfirmaSenha && <p className="mensagem-erro">{erroConfirmaSenha}</p>}
-                </div>
 
-                <button type="submit" className="btn-entrar">CADASTRAR</button>
+                    <button type="submit" className="btn-entrar">CADASTRAR</button>
 
-                <p className="link-cadastro">
-                    Já tem uma conta? <Link to="/login">Faça login aqui</Link>
-                </p>
+                    <p className="link-cadastro">
+                        Já tem uma conta? <Link to="/login">Faça login aqui</Link>
+                    </p>
 
-            </form>
+                </form>
+            </div>
         </div>
     );
 }

@@ -37,9 +37,9 @@
 
 /* Ícone de check (sucesso) */
 .face-icon-success {
-    width: 249px; /* Largura conforme a especificação */
-    height: 250px; /* Altura conforme a especificação */
-    margin-bottom: 30px; /* Espaço entre o ícone e o texto */
+    width: 199px; /* Largura conforme a especificação */
+    height: 200px; /* Altura conforme a especificação */
+    margin-bottom: 50px; /* Espaço entre o ícone e o texto */
 }
 
 /* Texto de sucesso */

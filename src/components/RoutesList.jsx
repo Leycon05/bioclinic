@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/SharedBackground.css'; // Importar o novo arquivo de fundo compartilhado
 
 function RoutesList() {
     const routes = [
@@ -8,20 +9,15 @@ function RoutesList() {
         { path: '/face-sucesso', name: 'FaceID Sucesso' },
         { path: '/face-erro', name: 'FaceID Erro' },
         { path: '/permissao-localizacao', name: 'Permissão Localização' },
+        { path: '/sobre-a-clinica-servicos', name: 'Sobre a Clínica e Serviços' },
     ];
 
     return (
-        <div style={{ 
+        <div className="background-container" style={{ 
             padding: '20px', 
             fontFamily: 'Arial, sans-serif', 
-            backgroundColor: 'black', 
             color: 'white', 
-            minHeight: '100vh', 
-            width: '100vw', /* Garante que ocupe a largura total da viewport */
-            position: 'fixed', /* Fixa na viewport */
-            top: 0,
-            left: 0,
-            zIndex: 9999 /* Garante que fique acima de tudo */
+            zIndex: 1 // Garante que o conteúdo fique acima do fundo
         }}>
             <h1>Lista de Rotas</h1>
             <p>Clique para navegar:</p>

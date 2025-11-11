@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import * as faceapi from 'face-api.js'; // Importa a biblioteca face-api.js
+import '../styles/SharedBackground.css'; // Importar o novo arquivo de fundo compartilhado
 
 // Função para validar CPF
 const validarCPF = (cpf) => {
@@ -192,183 +193,185 @@ function Login() {
     };
 
     return (
-        <div className="login-card">
-            {/* O formulário agora usa a função handleLoginSubmit */}
-            <form className="login-form" onSubmit={handleLoginSubmit}>
-                
-                {/* O título e o subtítulo agora são escondidos no modo FaceID */}
-                {metodoLogin !== 'faceid' && (
-                    <>
-                        <h1>Login</h1>
-                        <p className="subtitulo">Preencha seus dados para acessar.</p>
-                    </>
-                )}
+        <div className="background-container">
+            <div className="login-card">
+                {/* O formulário agora usa a função handleLoginSubmit */}
+                <form className="login-form" onSubmit={handleLoginSubmit}>
+                    
+                    {/* O título e o subtítulo agora são escondidos no modo FaceID */}
+                    {metodoLogin !== 'faceid' && (
+                        <>
+                            <h1>Login</h1>
+                            <p className="subtitulo">Preencha seus dados para acessar.</p>
+                        </>
+                    )}
 
-                {/* --- MODO PADRÃO (Nome/Senha) --- */}
-                {metodoLogin === 'padrao' && (
-                    <> 
-                        <div className="input-group">
-                            <label htmlFor="nome">Nome completo</label>
-                            <div className="input-field">
-                                <input type="text" id="nome" name="nome" required />
-                                <i className="fa-solid fa-user icon"></i>
+                    {/* --- MODO PADRÃO (Nome/Senha) --- */}
+                    {metodoLogin === 'padrao' && (
+                        <> 
+                            <div className="input-group">
+                                <label htmlFor="nome">Nome completo</label>
+                                <div className="input-field">
+                                    <input type="text" id="nome" name="nome" required />
+                                    <i className="fa-solid fa-user icon"></i>
+                                </div>
                             </div>
-                        </div>
 
+                            <div className="input-group">
+                                <label htmlFor="senha">Senha</label>
+                                <div className="input-field">
+                                    <input 
+                                        type={senhaVisivel ? "text" : "password"} 
+                                        id="senha" 
+                                        name="senha" 
+                                        required
+                                        minLength={6}
+                                    />
+                                    <i 
+                                        className={senhaVisivel ? "fa-solid fa-eye-slash icon" : "fa-solid fa-eye icon"}
+                                        id="toggle-senha"
+                                        onClick={toggleVisibilidadeSenha}
+                                    ></i>
+                                </div>
+                                <a href="#" className="esqueci-senha">Esqueci minha senha</a>
+                            </div>
+                        </>
+                    )}
+
+                    {/* --- MODO CPF --- */}
+                    {metodoLogin === 'cpf' && (
                         <div className="input-group">
-                            <label htmlFor="senha">Senha</label>
+                            <label htmlFor="cpf">CPF</label>
                             <div className="input-field">
                                 <input 
-                                    type={senhaVisivel ? "text" : "password"} 
-                                    id="senha" 
-                                    name="senha" 
-                                    required
-                                    minLength={6}
+                                    type="text" 
+                                    id="cpf" 
+                                    name="cpf" 
+                                    required 
+                                    placeholder="000.000.000-00" 
+                                    pattern="\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}"
+                                    value={cpf}
+                                    onChange={handleCpfChange}
                                 />
-                                <i 
-                                    className={senhaVisivel ? "fa-solid fa-eye-slash icon" : "fa-solid fa-eye icon"}
-                                    id="toggle-senha"
-                                    onClick={toggleVisibilidadeSenha}
-                                ></i>
+                                <i className="fa-solid fa-id-card icon"></i>
                             </div>
-                            <a href="#" className="esqueci-senha">Esqueci minha senha</a>
+                            {cpfInvalido && <p className="mensagem-erro">CPF inválido. Verifique o número.</p>}
                         </div>
-                    </>
-                )}
+                    )}
 
-                {/* --- MODO CPF --- */}
-                {metodoLogin === 'cpf' && (
-                    <div className="input-group">
-                        <label htmlFor="cpf">CPF</label>
-                        <div className="input-field">
-                            <input 
-                                type="text" 
-                                id="cpf" 
-                                name="cpf" 
-                                required 
-                                placeholder="000.000.000-00" 
-                                pattern="\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}"
-                                value={cpf}
-                                onChange={handleCpfChange}
-                            />
-                            <i className="fa-solid fa-id-card icon"></i>
-                        </div>
-                        {cpfInvalido && <p className="mensagem-erro">CPF inválido. Verifique o número.</p>}
-                    </div>
-                )}
-
-                {/* --- MODO FACEID --- */}
-                {metodoLogin === 'faceid' && (
-                    <>
-                        <div className="scan-placeholder">
-                            {modelsLoaded ? (
-                                cameraStream ? (
-                                    <video id="camera-feed" ref={videoRef} autoPlay playsInline className="camera-feed"></video>
+                    {/* --- MODO FACEID --- */}
+                    {metodoLogin === 'faceid' && (
+                        <>
+                            <div className="scan-placeholder">
+                                {modelsLoaded ? (
+                                    cameraStream ? (
+                                        <video id="camera-feed" ref={videoRef} autoPlay playsInline className="camera-feed"></video>
+                                    ) : (
+                                        <span className="camera-text">Aguardando acesso à câmera...</span>
+                                    )
                                 ) : (
-                                    <span className="camera-text">Aguardando acesso à câmera...</span>
-                                )
-                            ) : (
-                                <span className="camera-text">Carregando modelos de FaceID...</span>
-                            )}
-                            <canvas ref={canvasRef} style={{ display: 'none' }}></canvas> {/* Canvas escondido para captura */}
-                        </div>
-                        
-                        {/* Botão de "Capturar Rosto" */}
-                        <button type="button" className="btn-opcao btn-capturar-rosto" style={{ zIndex: 10 }} onClick={() => {
-                            // Simula a captura e reconhecimento do rosto
-                            if (videoRef.current && canvasRef.current && modelsLoaded) {
-                                const video = videoRef.current;
-                                const canvas = canvasRef.current;
-                                const context = canvas.getContext('2d');
-
-                                // Ajusta o tamanho do canvas para o do vídeo
-                                canvas.width = video.videoWidth;
-                                canvas.height = video.videoHeight;
-
-                                // Desenha o frame atual do vídeo no canvas
-                                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                                // Obtém a imagem em Base64
-                                const imageData = canvas.toDataURL('image/png');
-                                console.log("Imagem capturada (Base64):", imageData.substring(0, 100) + "..."); // Loga uma parte da imagem
-
-                                alert("Rosto capturado! Simulando envio para API de reconhecimento...");
-                                setTimeout(async () => {
-                                    // Simula a resposta da API
-                                    // Usar face-api.js para detecção
-                                    const detections = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor();
-                                    
-                                    if (detections) {
-                                        // Aqui você faria a lógica de comparação com rostos conhecidos
-                                        // Por enquanto, apenas simulamos um sucesso
-                                        setFaceIdReconhecido(true);
-                                        alert("Rosto detectado com sucesso!");
-                                    } else {
-                                        setFaceIdReconhecido(false);
-                                        alert("Nenhum rosto detectado ou FaceID falhou. Tente novamente.");
-                                    }
-                                }, 2000); // Simula o tempo de resposta da API
-                            } else {
-                                alert("Câmera não disponível, modelos não carregados ou não iniciada.");
-                            }
-                        }}>
-                            Capturar Rosto
-                        </button>
-
-                        {/* Botão de "Voltar" específico para o modo FaceID */}
-                        {metodoLogin === 'faceid' && (
-                            <button type="button" className="btn-opcao btn-voltar btn-faceid-voltar" onClick={() => setMetodoLogin('padrao')}>
-                                Voltar
-                            </button>
-                        )}
-                    </>
-                )}
-                
-                {/* Esta secção inteira é escondida no modo FaceID */}
-                {metodoLogin !== 'faceid' && (
-                    <>
-                        <div className="opcoes-entrada">
-                            <p>Opções de entrada:</p>
-                            <div className="botoes-opcoes">
-                                
-                                {/* Mostra "FaceID" */}
-                                <button type="button" className="btn-opcao" onClick={() => {
-                                    setMetodoLogin('faceid');
-                                    // Simula um reconhecimento de FaceID após um pequeno atraso
-                                    setTimeout(() => {
-                                        setFaceIdReconhecido(true);
-                                        alert("FaceID reconhecido com sucesso!");
-                                    }, 2000); // 2 segundos de atraso
-                                }}>
-                                    FaceID
-                                </button>
-
-                                {/* Mostra "CPF" se o método NÃO for 'cpf' */}
-                                {metodoLogin !== 'cpf' && (
-                                    <button type="button" className="btn-opcao" onClick={() => setMetodoLogin('cpf')}>
-                                        CPF
-                                    </button>
+                                    <span className="camera-text">Carregando modelos de FaceID...</span>
                                 )}
-                                
-                                {/* Mostra "Voltar" (para Nome/Senha) se estivermos no modo CPF */}
-                                {metodoLogin === 'cpf' && (
-                                    <button type="button" className="btn-opcao btn-voltar" onClick={() => setMetodoLogin('padrao')}>
-                                        Nome/Senha
-                                    </button>
-                                )}
+                                <canvas ref={canvasRef} style={{ display: 'none' }}></canvas> {/* Canvas escondido para captura */}
                             </div>
-                        </div>
+                            
+                            {/* Botão de "Capturar Rosto" */}
+                            <button type="button" className="btn-opcao btn-capturar-rosto" style={{ zIndex: 10 }} onClick={() => {
+                                // Simula a captura e reconhecimento do rosto
+                                if (videoRef.current && canvasRef.current && modelsLoaded) {
+                                    const video = videoRef.current;
+                                    const canvas = canvasRef.current;
+                                    const context = canvas.getContext('2d');
 
-                        <button type="submit" className="btn-entrar">ENTRAR</button>
+                                    // Ajusta o tamanho do canvas para o do vídeo
+                                    canvas.width = video.videoWidth;
+                                    canvas.height = video.videoHeight;
 
-                        {/* 2. MUDANÇA: <a href> trocado por <Link to> */}
-                        <p className="link-cadastro">
-                            Não tem login? <Link to="/cadastro">Cadastre-se aqui</Link>
-                        </p>
-                    </>
-                )}
-                
-            </form>
+                                    // Desenha o frame atual do vídeo no canvas
+                                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                                    // Obtém a imagem em Base64
+                                    const imageData = canvas.toDataURL('image/png');
+                                    console.log("Imagem capturada (Base64):", imageData.substring(0, 100) + "..."); // Loga uma parte da imagem
+
+                                    alert("Rosto capturado! Simulando envio para API de reconhecimento...");
+                                    setTimeout(async () => {
+                                        // Simula a resposta da API
+                                        // Usar face-api.js para detecção
+                                        const detections = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor();
+                                        
+                                        if (detections) {
+                                            // Aqui você faria a lógica de comparação com rostos conhecidos
+                                            // Por enquanto, apenas simulamos um sucesso
+                                            setFaceIdReconhecido(true);
+                                            alert("Rosto detectado com sucesso!");
+                                        } else {
+                                            setFaceIdReconhecido(false);
+                                            alert("Nenhum rosto detectado ou FaceID falhou. Tente novamente.");
+                                        }
+                                    }, 2000); // Simula o tempo de resposta da API
+                                } else {
+                                    alert("Câmera não disponível, modelos não carregados ou não iniciada.");
+                                }
+                            }}>
+                                Capturar Rosto
+                            </button>
+
+                            {/* Botão de "Voltar" específico para o modo FaceID */}
+                            {metodoLogin === 'faceid' && (
+                                <button type="button" className="btn-opcao btn-voltar btn-faceid-voltar" onClick={() => setMetodoLogin('padrao')}>
+                                    Voltar
+                                </button>
+                            )}
+                        </>
+                    )}
+                    
+                    {/* Esta secção inteira é escondida no modo FaceID */}
+                    {metodoLogin !== 'faceid' && (
+                        <>
+                            <div className="opcoes-entrada">
+                                <p>Opções de entrada:</p>
+                                <div className="botoes-opcoes">
+                                    
+                                    {/* Mostra "FaceID" */}
+                                    <button type="button" className="btn-opcao" onClick={() => {
+                                        setMetodoLogin('faceid');
+                                        // Simula um reconhecimento de FaceID após um pequeno atraso
+                                        setTimeout(() => {
+                                            setFaceIdReconhecido(true);
+                                            alert("FaceID reconhecido com sucesso!");
+                                        }, 2000); // 2 segundos de atraso
+                                    }}>
+                                        FaceID
+                                    </button>
+
+                                    {/* Mostra "CPF" se o método NÃO for 'cpf' */}
+                                    {metodoLogin !== 'cpf' && (
+                                        <button type="button" className="btn-opcao" onClick={() => setMetodoLogin('cpf')}>
+                                            CPF
+                                        </button>
+                                    )}
+                                    
+                                    {/* Mostra "Voltar" (para Nome/Senha) se estivermos no modo CPF */}
+                                    {metodoLogin === 'cpf' && (
+                                        <button type="button" className="btn-opcao btn-voltar" onClick={() => setMetodoLogin('padrao')}>
+                                            Nome/Senha
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
+                            <button type="submit" className="btn-entrar">ENTRAR</button>
+
+                            {/* 2. MUDANÇA: <a href> trocado por <Link to> */}
+                            <p className="link-cadastro">
+                                Não tem login? <Link to="/cadastro">Cadastre-se aqui</Link>
+                            </p>
+                        </>
+                    )}
+                    
+                </form>
+            </div>
         </div>
     );
 }

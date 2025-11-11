@@ -6,6 +6,7 @@ import LocationSVG from '../assets/imagens/Location.svg'; // Importa o SVG de lo
 import '../styles/Login.css';
 // E adicionar os estilos específicos desta tela
 import '../styles/PermissaoLocalizacao.css';
+import '../styles/SharedBackground.css'; // Importar o novo arquivo de fundo compartilhado
 
 function PermissaoLocalizacao() {
     const navigate = useNavigate();
@@ -33,41 +34,43 @@ function PermissaoLocalizacao() {
     }
 
     return (
-        // Reutilizamos o .login-card para manter o mesmo visual
-        <div className="login-card"> 
-            <form className="login-form">
-                
-                <h1 className="permissao-title">Permissão de Localização</h1>
-
-                {/* O container do ícone (baseado na imagem) */}
-                <div className="permissao-icon-container">
-                    <img src={LocationSVG} alt="Location" className="permissao-icon" />
-                </div>
-
-                {/* O texto explicativo (baseado na imagem) */}
-                <p className="permissao-texto">
-                Para oferecer uma experiência personalizada e mostrar serviços próximos a você, precisamos acessar sua localização.                 </p>
-
-                {/* Os dois botões (baseado na imagem) */}
-                <div className="permissao-botoes-container">
-                    <button 
-                        type="button" 
-                        className="btn-permitir" 
-                        onClick={handlePermitir}
-                    >
-                        PERMITIR
-                    </button>
+        <div className="background-container">
+            {/* Reutilizamos o .login-card para manter o mesmo visual */}
+            <div className="login-card"> 
+                <form className="login-form">
                     
-                    <button 
-                        type="button" 
-                        className="btn-agora-nao"
-                        onClick={handleAgoraNao}
-                    >
-                        Agora não
-                    </button>
-                </div>
+                    <h1 className="permissao-title">Permissão de Localização</h1>
 
-            </form>
+                    {/* O container do ícone (baseado na imagem) */}
+                    <div className="permissao-icon-container">
+                        <img src={LocationSVG} alt="Location" className="permissao-icon" />
+                    </div>
+
+                    {/* O texto explicativo (baseado na imagem) */}
+                    <p className="permissao-texto">
+                    Para oferecer uma experiência personalizada e mostrar serviços próximos a você, precisamos acessar sua localização.                 </p>
+
+                    {/* Os dois botões (baseado na imagem) */}
+                    <div className="permissao-botoes-container">
+                        <button 
+                            type="button" 
+                            className="btn-permitir" 
+                            onClick={handlePermitir}
+                        >
+                            PERMITIR
+                        </button>
+                        
+                        <button 
+                            type="button" 
+                            className="btn-agora-nao"
+                            onClick={handleAgoraNao}
+                        >
+                            Agora não
+                        </button>
+                    </div>
+
+                </form>
+            </div>
         </div>
     );
 }
