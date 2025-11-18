@@ -1,30 +1,49 @@
-import { Routes, Route } from 'react-router-dom'
-import Login from './components/Login.jsx'
-import Cadastro from './components/Cadastro.jsx' // Importar a nova tela
-import FaceSuccess from './components/FaceSuccess.jsx' // 1. Importar a nova tela
-import FaceError from './components/FaceError.jsx' // 1. Importar a nova tela
-import PermissaoLocalizacao from './components/PermissaoLocalizacao.jsx' // 1. Importar a nova tela
-import RoutesList from './components/RoutesList.jsx'; // Importar a nova tela de lista de rotas
-import SobreAClinicaServicos from './components/SobreAClinicaServicos.jsx'; // Importar a nova tela consolidada
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Login from './components/Login.jsx';
+import Cadastro from './components/Cadastro.jsx';
+import FaceSuccess from './components/FaceSuccess.jsx';
+import FaceError from './components/FaceError.jsx';
+import PermissaoLocalizacao from './components/PermissaoLocalizacao.jsx';
+import RoutesList from './components/RoutesList.jsx';
+import SobreAClinicaServicos from './components/SobreAClinicaServicos.jsx';
+
+// Nossas importações de rota protegida
+import Perfil from './components/Perfil.jsx';
+import PrivateRoute from './components/PrivateRoute.jsx';
+import Logado from './components/Logado.jsx'; // <-- 1. Importar o novo componente
 
 function App() {
   return (
     <Routes>
-      {/* A URL "/" (raiz) mostra a tela de Login */}
-      <Route path="/" element={<RoutesList />} /> 
-     <Route path="/login" element={<Login />} /> 
-
-      
-      {/* A URL "/cadastro" mostra a tela de Cadastro */}
+      {/* --- Rotas Públicas --- */}
+      <Route path="/" element={<Navigate to="/routes-list" />} /> 
+      <Route path="/login" element={<Login />} /> 
       <Route path="/cadastro" element={<Cadastro />} /> 
-    {/* 2. Adicionar a nova rota de sucesso */}
       <Route path="/face-sucesso" element={<FaceSuccess />} /> 
-
       <Route path="/face-erro" element={<FaceError />} />
-
       <Route path="/permissao-localizacao" element={<PermissaoLocalizacao />} />
-      <Route path="/routes-list" element={<RoutesList />} /> {/* Nova rota para listar telas */}
-      <Route path="/sobre-a-clinica-servicos" element={<SobreAClinicaServicos />} /> {/* Nova rota para a tela consolidada */}
+      <Route path="/routes-list" element={<RoutesList />} />
+      <Route path="/sobre-a-clinica-servicos" element={<SobreAClinicaServicos />} />
+
+      {/* --- Rotas Protegidas --- */}
+      <Route 
+        path="/perfil" 
+        element={
+          <PrivateRoute>
+            <Perfil />
+          </PrivateRoute>
+        } 
+      />
+
+      <Route 
+        path="/logado" 
+        element={
+          <PrivateRoute>
+            <Logado />
+          </PrivateRoute>
+        } 
+      />
+      
     </Routes>
   );
 }

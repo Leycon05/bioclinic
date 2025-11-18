@@ -144,8 +144,8 @@ body {
     background-color: #f8d0e0;
 }
 
-/* 6. BOTÃO PRINCIPAL "ENTRAR" */
-.btn-entrar {
+/* 6. BOTÃO PRINCIPAL "cadastrar" */
+.btn-cadastrar {
     width: 100%;
     padding: 15px;
     border: none;
@@ -160,8 +160,8 @@ body {
     font-weight: 700;  
 }
 
-.btn-entrar:hover {
-    background-color: #d493a7;
+.btn-cadastrar:hover {
+    background-color: #b88888;
 }
 
 /* 7. LINK DE CADASTRO */
@@ -241,6 +241,14 @@ body {
 .btn-voltar {
     background-color: #E6A5A5; 
     color: #FFFFFF; 
+}
+.btn-opcao {
+    margin-top: 10px; /* Espaço acima do botão Entrar */
+    background-color: #E6A5A5; 
+
+}
+.btn-opcao:hover {
+    background-color: #b88888;
 }
 
 .btn-voltar:hover {
