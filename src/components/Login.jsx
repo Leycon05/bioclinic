@@ -213,7 +213,7 @@ function Login() {
                             <label>Informe seu CPF para reconhecimento</label>
                             <div className="input-field">
                                 <input 
-                                    type="number" placeholder="000.000.000-00"
+                                    type="text" placeholder="000.000.000-00"
                                     value={cpf} onChange={handleCpfChange}
                                     autoFocus
                                 />
