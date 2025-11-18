@@ -333,7 +333,7 @@ function Login() {
                                 <button type="button" className="btn-opcao" onClick={selecionarModoFacial}>
                                     <i className="fa-solid fa-face-viewfinder"></i> FaceID
                                 </button>
-                                <button type="submit" className="btn-opcao" style={{ backgroundColor: '#d493a7' }}>
+                                <button type="submit" className="btn-opcao" >
                                     ENTRAR
                                 </button>
                             </div>

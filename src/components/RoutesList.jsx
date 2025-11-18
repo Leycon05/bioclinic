@@ -10,6 +10,7 @@ function RoutesList() {
         { path: '/face-erro', name: 'FaceID Erro' },
         { path: '/permissao-localizacao', name: 'Permissão Localização' },
         { path: '/sobre-a-clinica-servicos', name: 'Sobre a Clínica e Serviços' },
+        {path: '/perfil', name: 'Perfil' },
     ];
 
     return (

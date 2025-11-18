@@ -24,25 +24,26 @@ function App() {
       <Route path="/permissao-localizacao" element={<PermissaoLocalizacao />} />
       <Route path="/routes-list" element={<RoutesList />} />
       <Route path="/sobre-a-clinica-servicos" element={<SobreAClinicaServicos />} />
+      <Route path="/perfil" element={<Perfil />} />
 
       {/* --- Rotas Protegidas --- */}
-      <Route 
+      {/* <Route 
         path="/perfil" 
         element={
           <PrivateRoute>
             <Perfil />
           </PrivateRoute>
         } 
-      />
+      // />
 
-      <Route 
-        path="/logado" 
-        element={
-          <PrivateRoute>
-            <Logado />
-          </PrivateRoute>
-        } 
-      />
+      // <Route 
+      //   path="/logado" 
+      //   element={
+      //     <PrivateRoute>
+      //       <Logado />
+      //     </PrivateRoute>
+      //   } 
+      // /> */}
       
     </Routes>
   );
