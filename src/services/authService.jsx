@@ -8,32 +8,35 @@ export const registrar = async (userData) => {
   try {
     const response = await api.post('/auth/registrar', {
       nome: userData.nome,
-      cpf: userData.cpf, // CPF já deve estar sem formatação
+      cpf: userData.cpf, 
       senha: userData.senha
     });
     return response.data;
   } catch (error) {
-    // Lança a mensagem de erro do backend ou uma padrão
     throw new Error(error.response?.data?.message || 'Erro ao tentar cadastrar.');
   }
 };
 
 /**
- * Autentica um usuário com CPF e Senha.
- * @param {object} credentials - Credenciais {cpf, senha}.
+ * Autentica um usuário com Nome (Usuário) e Senha.
+ * @param {object} credentials - Credenciais { usuario, senha }.
  */
 export const login = async (credentials) => {
   try {
+    // ATENÇÃO: Certifique-se que seu Back-end tem esta rota '/auth/login-nome'
+    // esperando receber "nome" e "senha" no body.
     const response = await api.post('/auth/login-nome', {
-      nome: credentials.nome, // CPF já deve estar sem formatação
+      
+      // MUDANÇA AQUI: O Login.jsx envia 'usuario', então mapeamos para 'nome'
+      // para enviar ao backend.
+      nome: credentials.usuario, 
       senha: credentials.senha
     });
     
-    // Retorna os dados (que devem incluir o token)
     return response.data;
   } catch (error) {
-    // Lança a mensagem de erro do backend ou uma padrão
-    throw new Error(error.response?.data || 'CPF ou senha inválidos.');
+    // MUDANÇA AQUI: Atualizei a mensagem de erro padrão
+    throw new Error(error.response?.data || 'Usuário ou senha inválidos.');
   }
 };
 
@@ -51,11 +54,9 @@ export const logout = () => {
  */
 export const registerFace = async (descriptor) => {
   try {
-    // Note: O token JWT já está sendo enviado pelo interceptor da 'api'
     const response = await api.post('/facial/register-face', { descriptor });
     return response.data;
   } catch (error) {
-    // Lança a mensagem de erro específica do backend ou uma genérica
     throw new Error(error.response?.data || error.message || 'Erro ao cadastrar rosto.');
   }
 };
@@ -66,10 +67,10 @@ export const registerFace = async (descriptor) => {
  */
 export const getFaceDescriptor = async (cpf) => {
   try {
+    // O FaceID continua usando CPF, então aqui NÃO mudamos nada. Está correto.
     const response = await api.get(`/auth/face-descriptor/${cpf}`);
-    return response.data; // Retorna o string do descritor
+    return response.data; 
   } catch (error) {
-    // Lança a mensagem do backend ou uma padrão
     throw new Error(error.response?.data || 'Nenhum rosto cadastrado para este CPF.');
   }
 };
@@ -80,8 +81,9 @@ export const getFaceDescriptor = async (cpf) => {
  */
 export const loginFace = async (cpf) => {
   try {
+    // O Login facial também continua sendo amarrado ao CPF. Está correto.
     const response = await api.post('/auth/login-face', { cpf });
-    return response.data; // Retorna { token: "..." }
+    return response.data; 
   } catch (error) {
     throw new Error(error.response?.data || 'Erro ao finalizar login facial.');
   }
