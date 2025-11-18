@@ -28,11 +28,9 @@ function Login() {
     const [nome, setNome] = useState('');
     const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');
+    const [targetDescriptor, setTargetDescriptor] = useState(null); 
     
     // Estados de Fluxo
-    // 'padrao': Nome + Senha
-    // 'cpf_facial': Apenas Input CPF (Preparo para FaceID)
-    // 'faceid': Câmera ligada
     const [metodoLogin, setMetodoLogin] = useState('padrao'); 
     
     const [senhaVisivel, setSenhaVisivel] = useState(false);
@@ -44,6 +42,10 @@ function Login() {
     const [cameraStream, setCameraStream] = useState(null);
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
+    
+    // Refs de controle
+    const detectionInterval = useRef(null);
+    const attemptsRef = useRef(0); // NOVO: Contador de tentativas
 
     // 1. Carregar Modelos
     useEffect(() => {
@@ -58,12 +60,13 @@ function Login() {
                 setModelsLoaded(true);
             } catch (error) {
                 console.error("Erro FaceAPI:", error);
+                setMensagem("Erro ao carregar IA.");
             }
         };
         loadModels();
     }, []);
 
-    // 2. Controle da Câmera (Só liga se metodoLogin for 'faceid')
+    // 2. Controle da Câmera
     useEffect(() => {
         const startCamera = async () => {
             if (modelsLoaded && !cameraStream) {
@@ -72,7 +75,7 @@ function Login() {
                     setCameraStream(stream);
                 } catch (err) {
                     setMensagem("Erro ao abrir câmera.");
-                    setMetodoLogin('cpf_facial'); // Volta para o input de CPF se falhar
+                    setMetodoLogin('cpf_facial');
                 }
             }
         };
@@ -81,19 +84,90 @@ function Login() {
                 cameraStream.getTracks().forEach(track => track.stop());
                 setCameraStream(null);
             }
+            if (detectionInterval.current) clearInterval(detectionInterval.current);
         };
 
         if (metodoLogin === 'faceid') startCamera();
         else stopCamera();
 
-        return () => { if (cameraStream) cameraStream.getTracks().forEach(track => track.stop()); };
+        return () => { 
+            if (cameraStream) cameraStream.getTracks().forEach(track => track.stop()); 
+            if (detectionInterval.current) clearInterval(detectionInterval.current);
+        };
     }, [metodoLogin, modelsLoaded]);
 
+    // 3. Anexar stream e iniciar
     useEffect(() => {
-        if (cameraStream && videoRef.current) videoRef.current.srcObject = cameraStream;
+        if (cameraStream && videoRef.current) {
+            videoRef.current.srcObject = cameraStream;
+            videoRef.current.onplay = () => {
+                startFaceDetection();
+            };
+        }
     }, [cameraStream]);
 
-    // --- AÇÕES ---
+    // --- LÓGICA DE DETECÇÃO ---
+    const startFaceDetection = () => {
+        if (detectionInterval.current) clearInterval(detectionInterval.current);
+        
+        // Reinicia o contador de tentativas
+        attemptsRef.current = 0; 
+        setStatusFaceID("Procurando rosto...");
+
+        detectionInterval.current = setInterval(async () => {
+            // Incrementa tentativas
+            attemptsRef.current += 1;
+
+            // Lógica de Timeout (aprox 15 segundos: 30 tentativas * 500ms)
+            if (attemptsRef.current > 30) {
+                clearInterval(detectionInterval.current);
+                setStatusFaceID("Tempo esgotado.");
+                // Redireciona para erro por timeout
+                navigate('/face-erro');
+                return;
+            }
+
+            if (!videoRef.current || !canvasRef.current || !targetDescriptor) return;
+
+            const detections = await faceapi.detectSingleFace(videoRef.current, new faceapi.TinyFaceDetectorOptions())
+                .withFaceLandmarks()
+                .withFaceDescriptor();
+
+            if (detections) {
+                const displaySize = { width: videoRef.current.videoWidth, height: videoRef.current.videoHeight };
+                faceapi.matchDimensions(canvasRef.current, displaySize);
+                
+                const resizedDetections = faceapi.resizeResults(detections, displaySize);
+                canvasRef.current.getContext('2d').clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+                faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
+
+                const distance = faceapi.euclideanDistance(detections.descriptor, targetDescriptor);
+                
+                if (distance < 0.5) {
+                    setStatusFaceID("Rosto confirmado! Entrando...");
+                    clearInterval(detectionInterval.current); 
+                    
+                    try {
+                        const cpfLimpo = cpf.replace(/[^\d]+/g, '');
+                        const response = await loginFace(cpfLimpo);
+                        localStorage.setItem('token', response.token);
+                        navigate('/face-sucesso');
+                    } catch (error) {
+                        navigate('/face-erro');
+                    }
+                } else {
+                    // Feedback visual de tentativas restantes (opcional, mas ajuda o user)
+                    const restantes = 30 - attemptsRef.current;
+                    setStatusFaceID(`Rosto incorreto. Tente aproximar. (${restantes})`);
+                }
+            } else {
+                const restantes = 30 - attemptsRef.current;
+                setStatusFaceID(`Nenhum rosto detectado... (${restantes})`);
+            }
+        }, 500);
+    };
+
+    // --- AÇÕES DO USUÁRIO ---
 
     const handleCpfChange = (e) => {
         let v = e.target.value.replace(/\D/g, '');
@@ -105,64 +179,78 @@ function Login() {
         setMensagem('');
     };
 
-    // 1. Ao clicar no botão "FaceID" na tela inicial
     const selecionarModoFacial = () => {
-        setMensagem('');
-        setNome(''); 
-        setSenha('');
-        setMetodoLogin('cpf_facial'); // Vai para tela de CPF apenas
+        setMensagem(''); setNome(''); setSenha('');
+        setMetodoLogin('cpf_facial');
     };
 
-    // 2. Ao clicar em "Escanear Rosto" (após digitar CPF)
-    const iniciarEscaneamento = () => {
+    const iniciarEscaneamento = async () => {
         const cpfLimpo = cpf.replace(/[^\d]+/g, '');
         
         if (!validarCPF(cpfLimpo)) {
-            setMensagem('CPF inválido. Corrija para prosseguir.');
-            return;
+            setMensagem('CPF inválido.'); return;
         }
-
         if (!modelsLoaded) {
-            setMensagem('Sistema carregando, aguarde um momento...');
-            return;
+            setMensagem('Sistema carregando...'); return;
         }
 
-        // Tudo ok, liga a câmera
-        setMetodoLogin('faceid');
-        setStatusFaceID('Posicione o rosto...');
+        setMensagem('');
+        setStatusFaceID('Buscando seus dados...');
+
+        try {
+            const descriptorString = await getFaceDescriptor(cpfLimpo);
+            
+            if (!descriptorString) {
+                setMensagem('Biometria não cadastrada para este CPF.');
+                return;
+            }
+
+            let arr;
+            if (Array.isArray(descriptorString)) {
+                arr = descriptorString;
+            } else {
+                const cleanStr = typeof descriptorString === 'string' ? descriptorString.replace(/[\[\]]/g, '') : '';
+                arr = cleanStr.split(',').map(num => parseFloat(num));
+            }
+            
+            const float32 = new Float32Array(arr);
+            setTargetDescriptor(float32);
+            setMetodoLogin('faceid');
+
+        } catch (error) {
+            console.error(error);
+            setMensagem(error.message || 'Erro ao buscar biometria.');
+        }
     };
 
-    // 3. Submit do Login Padrão (Nome + Senha)
     const handleLoginPadrao = async (e) => {
         e.preventDefault();
         setMensagem('');
-        
-        if (!nome.trim()) { setMensagem('Nome completo.'); return; }
-        if (senha.length < 6) { setMensagem('No mínimo 6 caracteres.'); return; }
+        if (!nome.trim()) { setMensagem('Nome obrigatório.'); return; }
+        if (senha.length < 6) { setMensagem('Senha curta.'); return; }
 
         try {
             const response = await login({ usuario: nome, senha });
             localStorage.setItem('token', response.token);
             navigate('/perfil');
         } catch (err) {
-            setMensagem("Nome ou senha inválidos" || "Erro ao logar.");
+            setMensagem("Nome ou senha inválidos");
         }
     };
 
-    // Botão Voltar (reseta para Login Padrão)
     const voltarParaPadrao = () => {
         setMetodoLogin('padrao');
         setMensagem('');
         setStatusFaceID('');
+        if (detectionInterval.current) clearInterval(detectionInterval.current);
     };
 
+    // --- RENDER ---
     return (
         <div className="background-container">
             <div className="login-card">
-                {/* Usamos onSubmit apenas no modo padrão. Nos outros, usamos botões normais */}
                 <form className="login-form" onSubmit={metodoLogin === 'padrao' ? handleLoginPadrao : (e) => e.preventDefault()}>
 
-                    {/* --- CABEÇALHO --- */}
                     {metodoLogin !== 'faceid' && (
                         <>
                             <h1>Login</h1>
@@ -175,7 +263,7 @@ function Login() {
                     {mensagem && <p className="mensagem-alerta">{mensagem}</p>}
                     {statusFaceID && <p className="mensagem-sucesso">{statusFaceID}</p>}
 
-                    {/* --- CAMPO NOME (Só no modo Padrão) --- */}
+                    {/* Nome (Modo Padrão) */}
                     {metodoLogin === 'padrao' && (
                         <div className="input-group">
                             <label>Nome Completo</label>
@@ -189,7 +277,7 @@ function Login() {
                         </div>
                     )}
 
-                    {/* --- CAMPO SENHA (Só no modo Padrão) --- */}
+                    {/* Senha (Modo Padrão) */}
                     {metodoLogin === 'padrao' && (
                         <div className="input-group">
                             <label>Senha</label>
@@ -198,31 +286,27 @@ function Login() {
                                     type={senhaVisivel ? "text" : "password"}
                                     value={senha} onChange={e => setSenha(e.target.value)}
                                 />
-                                <i 
-                                    className={senhaVisivel ? "fa-solid fa-eye-slash icon" : "fa-solid fa-eye icon"}
-                                    onClick={() => setSenhaVisivel(!senhaVisivel)}
-                                    style={{cursor:'pointer'}}
-                                ></i>
+                                <i className={senhaVisivel ? "fa-solid fa-eye-slash icon" : "fa-solid fa-eye icon"}
+                                   onClick={() => setSenhaVisivel(!senhaVisivel)} style={{cursor:'pointer'}}></i>
                             </div>
                         </div>
                     )}
 
-                    {/* --- CAMPO CPF (Aparece no modo 'cpf_facial' - SEM SENHA) --- */}
+                    {/* CPF (Modo Preparo Facial) */}
                     {metodoLogin === 'cpf_facial' && (
                         <div className="input-group">
-                            <label>Informe seu CPF para reconhecimento</label>
+                            <label>Informe seu CPF</label>
                             <div className="input-field">
                                 <input 
                                     type="text" placeholder="000.000.000-00"
-                                    value={cpf} onChange={handleCpfChange}
-                                    autoFocus
+                                    value={cpf} onChange={handleCpfChange} autoFocus
                                 />
                                 <i className="fa-solid fa-id-card icon"></i>
                             </div>
                         </div>
                     )}
 
-                    {/* --- CÂMERA (Modo 'faceid') --- */}
+                    {/* Câmera (Modo FaceID) */}
                     {metodoLogin === 'faceid' && (
                         <div className="scan-placeholder">
                             {cameraStream ? (
@@ -233,61 +317,43 @@ function Login() {
                             <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0 }} />
                             
                             <button type="button" className="btn-opcao btn-voltar btn-faceid-voltar" 
-                                onClick={() => setMetodoLogin('cpf_facial')}>
+                                onClick={() => {
+                                    setMetodoLogin('cpf_facial');
+                                    setTargetDescriptor(null); 
+                                }}>
                                 Cancelar
                             </button>
                         </div>
                     )}
 
-                    {/* --- ÁREA DE BOTÕES INFERIORES --- */}
-                    
-                    {/* 1. Botões do Modo Padrão (Nome/Senha) */}
+                    {/* Botões */}
                     {metodoLogin === 'padrao' && (
                         <div className="opcoes-entrada">
                             <div className="botoes-opcoes">
-                                <button 
-                                    type="button" 
-                                    className="btn-opcao" 
-                                    onClick={selecionarModoFacial}
-                                >
+                                <button type="button" className="btn-opcao" onClick={selecionarModoFacial}>
                                     <i className="fa-solid fa-face-viewfinder"></i> FaceID
                                 </button>
-
-                                <button 
-                                    type="submit" 
-                                    className="btn-opcao" 
-                                >
+                                <button type="submit" className="btn-opcao" style={{ backgroundColor: '#d493a7' }}>
                                     ENTRAR
                                 </button>
                             </div>
                         </div>
                     )}
 
-                    {/* 2. Botões do Modo CPF Facial (Só CPF, Sem Senha) */}
                     {metodoLogin === 'cpf_facial' && (
                         <div className="opcoes-entrada">
-                            <button 
-                                type="button" 
-                                className="btn-opcao" 
-                                onClick={iniciarEscaneamento}
-                                style={{ width: '100%', marginBottom: '10px' }}
-                            >
+                            <button type="button" className="btn-opcao" onClick={iniciarEscaneamento}
+                                style={{ width: '100%', marginBottom: '10px', backgroundColor: '#d493a7' }}>
                                 ESCANEAR ROSTO <i className="fa-solid fa-camera"></i>
                             </button>
-
-                            <p 
-                                style={{cursor:'pointer', color:'#630527', fontSize:'13px', textAlign:'center'}} 
-                                onClick={voltarParaPadrao}
-                            >
+                            <p style={{cursor:'pointer', color:'#630527', fontSize:'13px', textAlign:'center'}} 
+                               onClick={voltarParaPadrao}>
                                 <i className="fa-solid fa-arrow-left"></i> Voltar para Login com Senha
                             </p>
                         </div>
                     )}
 
-                    <p className="link-cadastro">
-                        Não tem login? <Link to="/cadastro">Cadastre-se</Link>
-                    </p>
-
+                    <p className="link-cadastro">Não tem login? <Link to="/cadastro">Cadastre-se</Link></p>
                 </form>
             </div>
         </div>
