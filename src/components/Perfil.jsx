@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import * as faceapi from 'face-api.js';
 import { registerFace, logout } from '../services/authService';
 import '../styles/SharedBackground.css';
-
+import '../styles/Perfil.css'; // <--- ADICIONADO: Importa o novo estilo específico
 
 function Perfil() {
     const videoRef = useRef();
@@ -101,13 +101,11 @@ function Perfil() {
                 <p>Use a câmera abaixo para cadastrar seu rosto. Este passo é necessário para o login facial.</p>
                 
                 <div className="camera-container">
-                    <video ref={videoRef} autoPlay playsInline width="400" height="300" />
+                    <video ref={videoRef} autoPlay playsInline width="300" height="300" />
                 </div>
                 
                 <p className="status-facial">Status: {status}</p>
 
-                {/* --- CORREÇÃO AQUI --- */}
-                {/* O botão agora só é desabilitado se os modelos não estiverem carregados */}
                 <button 
                     onClick={handleRegisterFace} 
                     disabled={!modelsLoaded} 
@@ -115,7 +113,6 @@ function Perfil() {
                 >
                     {modelsLoaded ? 'Capturar e Salvar Rosto' : 'Carregando IA...'}
                 </button>
-                {/* --- FIM DA CORREÇÃO --- */}
 
                 <button 
                     onClick={logout} 

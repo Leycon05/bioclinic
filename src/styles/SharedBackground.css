@@ -27,7 +27,7 @@
     z-index: 0; 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .background-container {
         justify-content: center; /* Centraliza o card na horizontal em telas menores */
     }
