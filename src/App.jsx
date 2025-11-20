@@ -25,6 +25,7 @@ function App() {
       <Route path="/routes-list" element={<RoutesList />} />
       <Route path="/sobre-a-clinica-servicos" element={<SobreAClinicaServicos />} />
       <Route path="/perfil" element={<Perfil />} />
+      <Route path="/logado" element={<Logado />} />  {/* <-- 2. Definir a nova rota */}
 
       {/* --- Rotas Protegidas --- */}
       {/* <Route 

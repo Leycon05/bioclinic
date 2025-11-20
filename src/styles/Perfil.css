@@ -13,6 +13,7 @@
     align-items: center;
     padding: 8px 50px;
     align-content: center;
+    
 
 }
 
@@ -48,9 +49,7 @@
     justify-content: center;
     align-items: center;
 }
-.camera-container:hover {
-    border-color: #b88888;
-}
+
 
 /* O elemento de vídeo em si */
 .camera-container video {
@@ -78,17 +77,22 @@
     padding: 12px;
     border: none;
     border-radius: 30px;
-    background-color: #b88888; 
+    background-color: #630527; 
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s;
+    /* Mudamos aqui para 'all' para animar o movimento também */
+    transition: all 0.3s ease; 
     font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra inicial suave */
+
 }
 
 .btn-entrar:hover {
-    background-color: #630527;
+    transform: translateY(-3px); /* Move para cima */
+    box-shadow: 0 10px 20px rgba(99, 5, 39, 0.4); /* Sombra maior e colorida em baixo */
+
 }
 
 /* Botão Desabilitado (enquanto carrega) */
@@ -103,7 +107,7 @@
     padding: 12px;
     border: none;
     border-radius: 30px;
-    background-color: #b88888; /* Rosa padrão do projeto */
+    background-color: #E6A5A5; /* Rosa padrão do projeto */
     color: #FFFFFF;
     font-size: 14px;
     font-weight: 700;
@@ -114,7 +118,7 @@
 }
 
 .btn-voltar:hover {
-    background-color: #630527;
+    background-color: #b88888;
 }
 
 /* Responsividade */
