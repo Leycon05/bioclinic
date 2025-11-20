@@ -119,7 +119,7 @@ function Perfil() {
                     className="btn-opcao btn-voltar"
                     style={{marginTop: '10px'}}
                 >
-                    Sair (Logout)
+                    Voltar
                 </button>
             </div>
         </div>

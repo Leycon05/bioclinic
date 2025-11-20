@@ -3,16 +3,17 @@
 /* Reutiliza e ajusta o cartão para o conteúdo da câmera */
 .login-card {
     background-color: #ffffff;
-    padding: 25px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px; /* Um pouco mais largo para caber a câmera */
     text-align: center;
-    margin: 0 auto; /* Centraliza horizontalmente */
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 8px 50px;
+    align-content: center;
+
 }
 
 /* Título */
@@ -20,7 +21,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     color: #630527;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 /* Texto de instrução */
@@ -28,7 +29,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: #555;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     line-height: 1.4;
 }
 
@@ -46,6 +47,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.camera-container:hover {
+    border-color: #b88888;
 }
 
 /* O elemento de vídeo em si */
@@ -71,10 +75,10 @@
 /* Botão Principal (Capturar) */
 .btn-entrar {
     width: 100%;
-    padding: 15px;
+    padding: 12px;
     border: none;
     border-radius: 30px;
-    background-color: #2e7d32; /* Verde para indicar ação de Salvar/Sucesso */
+    background-color: #b88888; 
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 700;
@@ -84,7 +88,7 @@
 }
 
 .btn-entrar:hover {
-    background-color: #1b5e20;
+    background-color: #630527;
 }
 
 /* Botão Desabilitado (enquanto carrega) */
@@ -99,7 +103,7 @@
     padding: 12px;
     border: none;
     border-radius: 30px;
-    background-color: #E6A5A5; /* Rosa padrão do projeto */
+    background-color: #b88888; /* Rosa padrão do projeto */
     color: #FFFFFF;
     font-size: 14px;
     font-weight: 700;
@@ -110,7 +114,7 @@
 }
 
 .btn-voltar:hover {
-    background-color: #d493a7;
+    background-color: #630527;
 }
 
 /* Responsividade */
