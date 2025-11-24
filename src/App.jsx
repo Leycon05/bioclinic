@@ -5,7 +5,7 @@ import FaceSuccess from './components/FaceSuccess.jsx';
 import FaceError from './components/FaceError.jsx';
 import PermissaoLocalizacao from './components/PermissaoLocalizacao.jsx';
 import RoutesList from './components/RoutesList.jsx';
-import SobreAClinicaServicos from './components/SobreAClinicaServicos.jsx';
+import Servicos from './components/Servicos.jsx';
 
 // Nossas importações de rota protegida
 import Perfil from './components/Perfil.jsx';
@@ -23,7 +23,7 @@ function App() {
       <Route path="/face-erro" element={<FaceError />} />
       <Route path="/permissao-localizacao" element={<PermissaoLocalizacao />} />
       <Route path="/routes-list" element={<RoutesList />} />
-      <Route path="/sobre-a-clinica-servicos" element={<SobreAClinicaServicos />} />
+      <Route path="/servicos" element={<Servicos />} />
       <Route path="/perfil" element={<Perfil />} />
       <Route path="/logado" element={<Logado />} />  {/* <-- 2. Definir a nova rota */}
 

@@ -1,0 +1,234 @@
+/* Reset da página */
+.servicos-page-container {
+    display: flex;
+    flex-direction: column; /* Agora é coluna: Header em cima, conteúdo embaixo */
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- HEADER SUPERIOR --- */
+.main-header {
+    background-color: #0c2a4d; /* Azul escuro do seu tema */
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Espalha: Logo esq, Menu centro, Perfil dir */
+    padding: 0 40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    position: sticky; /* Opcional: fixa o topo */
+    top: 0;
+    z-index: 100;
+}
+
+/* 1. Logo */
+.header-logo h3 {
+    margin: 0;
+}
+
+/* 2. Menu de Navegação */
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 30px; /* Espaço entre os itens do menu */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #aeb9c7; /* Cinza azulado claro */
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s;
+    padding-bottom: 5px; /* Espaço para a linha de baixo */
+    border-bottom: 2px solid transparent; /* Linha invisível por padrão */
+}
+
+.nav-item:hover {
+    color: #ffffff;
+}
+
+/* Item Ativo (Simula a linha branca embaixo do "Serviços" na imagem) */
+.nav-item.active {
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+    font-weight: 600;
+}
+
+/* 3. Perfil */
+.header-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-avatar {
+    width: 35px;
+    height: 35px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0c2a4d; /* Ícone azul escuro */
+}
+
+.profile-name {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.profile-logout {
+    color: #aeb9c7;
+    font-size: 12px;
+    text-decoration: none;
+    margin-left: 5px;
+    transition: color 0.3s;
+}
+
+.profile-logout:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* --- CONTEÚDO PRINCIPAL (Ajustado) --- */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px; /* Limita a largura para não esticar demais em telas grandes */
+    margin: 0 auto; /* Centraliza o conteúdo */
+}
+
+/* Área de Conteúdo */
+.content-area {
+    padding: 40px;
+}
+
+.page-header {
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 32px;
+    color: #0c2a4d;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* GRID DE SERVIÇOS (Mantido igual, só ajustei cores se necessário) */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Estilo do Card */
+.service-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.icon-box {
+    width: 60px;
+    height: 60px;
+    background-color: #fce4ec; 
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #630527; 
+    font-size: 24px;
+}
+
+.service-card h3 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.service-card p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1; 
+}
+
+.btn-saiba-mais {
+    background-color: transparent;
+    border: 1px solid #630527;
+    color: #630527;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.btn-saiba-mais:hover {
+    background-color: #630527;
+    color: #fff;
+}
+
+/* Botão Voltar */
+.footer-actions {
+    margin-top: 20px;
+}
+
+.btn-voltar-servicos {
+    display: inline-block;
+    background-color: #b88888;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.btn-voltar-servicos:hover {
+    background-color: #630527;
+}
+
+/* Responsividade */
+@media (max-width: 850px) {
+    .main-header {
+        height: auto;
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+    }
+    
+    .nav-list {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

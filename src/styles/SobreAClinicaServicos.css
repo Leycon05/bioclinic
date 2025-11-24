@@ -1,7 +1,0 @@
-.sobre-clinica-servicos-container {
-    background-color: transparent; /* Garante que esta tela não use o fundo das outras */
-    min-height: 100vh; /* Garante que ocupe a altura total da viewport */
-    width: 100vw; /* Garante que ocupe a largura total */
-    position: relative; /* Para garantir que o z-index funcione se houver overlay */
-    z-index: 10; /* Z-index alto para garantir que fique acima do body */
-}
