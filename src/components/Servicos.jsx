@@ -1,55 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Servicos.css';
-
-// Importação da Logo
-import LogoBioClinic from '../assets/imagens/logo-nome-lateral.svg';
-
-// Caminho do ícone de perfil
-const IconePerfil = "src/assets/imagens/perfil.svg"; 
+import Header from './Header'; // <--- Importando o componente Header que você criou
 
 function Servicos() {
-    const [dropdownAberto, setDropdownAberto] = useState(false);
-
-    const toggleDropdown = () => {
-        setDropdownAberto(!dropdownAberto);
-    };
+    // Toda a lógica do dropdown agora vive dentro do Header.jsx,
+    // por isso removemos o useState e as funções daqui.
 
     return (
         <div className="servicos-page-container">
             
-            {/* HEADER SUPERIOR */}
-            <header className="main-header">
-                <div className="header-left">
-                    <div className="header-logo">
-                        <img src={LogoBioClinic} alt="Logo BioClinic" className="logo-img" />
-                    </div>
-                    <div className="header-search">
-                        <i className="fa-solid fa-magnifying-glass search-icon"></i>
-                        <input type="text" placeholder="Pesquisar" className="search-input" />
-                    </div>
-                </div>
+            {/* --- Usando o Componente Header --- */}
+            <Header />
 
-                <div className="header-profile-container">
-                    <div className="profile-trigger" onClick={toggleDropdown}>
-                        <div className="profile-avatar">
-                            <img src={IconePerfil} alt="Perfil" className="profile-icon-img" />
-                        </div>
-                        <i className={`fa-solid fa-chevron-down dropdown-arrow ${dropdownAberto ? 'open' : ''}`}></i>
-                    </div>
-
-                    {dropdownAberto && (
-                        <div className="profile-dropdown-menu">
-                            <Link to="/perfil" className="dropdown-item"><i className="fa-solid fa-user-doctor"></i> Meu Perfil</Link>
-                            <Link to="/configuracoes" className="dropdown-item"><i className="fa-solid fa-gear"></i> Configurações</Link>
-                            <div className="dropdown-divider"></div>
-                            <Link to="/login" className="dropdown-item logout-item"><i className="fa-solid fa-arrow-right-from-bracket"></i> Sair</Link>
-                        </div>
-                    )}
-                </div>
-            </header>
-
-            {/* CORPO DA PÁGINA */}
+            {/* CORPO DA PÁGINA (Sidebar + Conteúdo) - Mantido igual */}
             <div className="page-body">
                 <aside className="sidebar">
                     <nav className="sidebar-nav">
@@ -71,28 +35,24 @@ function Servicos() {
 
                         <div className="services-grid">
                             
-                            {/* Card 1 - NUTROLOGIA */}
-                            <div className="service-card card-nutrologia">
-                                <h3>Nutrologia</h3>
+                            <div className="service-card card-nutricao">
+                                <h3>Nutrição</h3>
                                 <p>Acompanhamento nutricional personalizado para sua saúde.</p>
                                 <button className="btn-saiba-mais">Saiba mais</button>
                             </div>
 
-                            {/* Card 2 - DERMATOLOGIA */}
                             <div className="service-card card-dermatologia">
                                 <h3>Dermatologia</h3>
                                 <p>Cuidados essenciais para a saúde e beleza da sua pele.</p>
                                 <button className="btn-saiba-mais">Saiba mais</button>
                             </div>
 
-                            {/* Card 3 - ENDOCRINOLOGIA */}
-                            <div className="service-card card-endocrinologia">
-                                <h3>Endocrinologia</h3>
-                                <p>Tratamento de distúrbios hormonais e metabólicos.</p>
+                            <div className="service-card card-telemedicina">
+                                <h3>Telemedicina</h3>
+                                <p>Consulta online, cuidado de qualidade. Agende seu horário conosco.</p>
                                 <button className="btn-saiba-mais">Saiba mais</button>
                             </div>
 
-                            {/* Card 4 - CARDIOLOGIA */}
                             <div className="service-card card-cardiologia">
                                 <h3>Cardiologia</h3>
                                 <p>Cuidado especializado para a saúde do seu coração.</p>

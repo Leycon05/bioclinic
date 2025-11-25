@@ -151,26 +151,29 @@
 }
 
 /* Ajustes de texto e botões para fundo escuro/imagem */
-.card-nutrologia h3, .card-dermatologia h3, .card-endocrinologia h3, .card-cardiologia h3 {
+.card-nutricao h3, .card-dermatologia h3, .card-telemedicina h3, .card-cardiologia h3 {
     color: #ffffff; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
-.card-nutrologia p, .card-dermatologia p, .card-endocrinologia p, .card-cardiologia p {
+.card-nutricao p, .card-dermatologia p, .card-telemedicina p, .card-cardiologia p {
     color: #f0f0f0; font-weight: 500;
 }
-.card-nutrologia .btn-saiba-mais, .card-dermatologia .btn-saiba-mais, .card-endocrinologia .btn-saiba-mais, .card-cardiologia .btn-saiba-mais {
+.card-nutricao .btn-saiba-mais, .card-dermatologia .btn-saiba-mais, .card-telemedicina .btn-saiba-mais, .card-cardiologia .btn-saiba-mais {
     border-color: #ffffff; color: #ffffff;
 }
-.card-nutrologia .btn-saiba-mais:hover, .card-dermatologia .btn-saiba-mais:hover, .card-endocrinologia .btn-saiba-mais:hover, .card-cardiologia .btn-saiba-mais:hover {
+.card-nutricao .btn-saiba-mais:hover, .card-dermatologia .btn-saiba-mais:hover, .card-telemedicina .btn-saiba-mais:hover, .card-cardiologia .btn-saiba-mais:hover {
     background-color: #ffffff; color: #630527;
 }
-.card-nutrologia , .card-dermatologia , .card-endocrinologia , .card-cardiologia  {
+/* Estilo dos ícones para cards com imagem (transparente) */
+.card-nutricao .icon-box, .card-dermatologia .icon-box, .card-telemedicina .icon-box, .card-cardiologia .icon-box  {
     background-color: rgba(255, 255, 255, 0.2); color: #ffffff;
+    /* Garante que o ícone tenha tamanho e flexbox mesmo com a classe extra */
+    width: 70px; height: 70px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; font-size: 28px;
 }
 
 /* --- IMAGENS ESPECÍFICAS DE FUNDO --- */
 /* NOTA: Coloque suas imagens na pasta src/assets/imagens/ e ajuste os nomes se necessário */
 
-.card-nutrologia {
+.card-nutricao {
     background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('src/assets/imagens/nutricao.svg'); /* Exemplo */
 }
 
@@ -178,12 +181,12 @@
     background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('/src/assets/imagens/pediatria.svg');
 }
 
-.card-endocrinologia {
-    background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('/src/assets/imagens/dna.svg'); /* Exemplo */
+.card-telemedicina {
+    background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('src/assets/imagens/telemedicina.svg'); /* Exemplo */
 }
 
 .card-cardiologia {
-    background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('/src/assets/imagens/coracao.svg'); /* Exemplo */
+    background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('src/assets/imagens/cardiologia.svg'); /* Exemplo */
 }
 
 /* =========================================

@@ -1,0 +1,188 @@
+/* --- HEADER SUPERIOR --- */
+.main-header {
+    background-color: rgba(99, 5, 39, 0.5); /* Vinho transparente */
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    border-bottom: 1px solid #e0e0e0;
+    z-index: 100;
+    flex-shrink: 0;
+    position: relative;
+}
+
+/* Logo */
+.header-left { display: flex; align-items: center; gap: 40px; }
+.logo-img { height: 40px; width: auto; object-fit: contain; }
+
+/* Barra de Pesquisa */
+.header-search {
+    display: flex;
+    align-items: center;
+    background-color: #f0f2f5;
+    border-radius: 5px;
+    padding: 8px 20px;
+    width: 500px;
+    border: 1px solid #630527;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.search-icon { color: #888; margin-right: 10px; font-size: 14px; }
+.search-input { background: transparent; border: none; outline: none; color: #333; width: 100%; font-family: 'Inter', sans-serif; font-size: 14px; }
+
+/* Perfil */
+.header-profile-container { position: relative; }
+
+.profile-trigger { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    cursor: pointer; 
+    padding: 6px 12px; 
+    border-radius: 30px; 
+    transition: background-color 0.2s; 
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.profile-trigger:hover { background-color: rgba(255, 255, 255, 0.3); }
+
+.profile-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 2px solid #fff; background-color: #fff; }
+.profile-icon-img { width: 100%; height: 100%; object-fit: cover; }
+
+.dropdown-arrow { font-size: 12px; color: #000; transition: transform 0.3s ease; margin-left: 5px; }
+.dropdown-arrow.open { transform: rotate(180deg); }
+
+/* --- MENU DROPDOWN --- */
+.profile-dropdown-menu {
+    position: absolute;
+    top: 140%;
+    right: 0;
+    height: 450px;
+    width: 300px; /* Largura confortável */
+    background-color: #630527; /* Fundo Vinho Escuro */
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    padding: 15px 0; /* Espaçamento interno */
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* Setinha no topo do menu */
+.profile-dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #630527;
+}
+
+/* --- ÁREA DE INFORMAÇÕES DO USUÁRIO --- */
+.dropdown-user-info {
+    padding: 0 20px 10px 20px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative; /* Necessário para o botão de editar absoluto */
+}
+
+/* Botão de Editar (Lápis) */
+.btn-edit-user {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #ffffff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 12px;
+}
+
+.btn-edit-user:hover {
+    background-color: #ffffff;
+    color: #630527;
+    transform: scale(1.1);
+}
+
+/* Foto Grande no Menu */
+.dropdown-user-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255,255,255,0.3);
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.dropdown-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-name { font-size: 18px; margin-bottom: 5px; }
+.user-detail { font-size: 13px; color: #e0e0e0; margin-bottom: 3px; }
+
+.user-status-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+/* Tags de Status */
+.status-tag {
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+}
+.status-tag.bio { background-color: #4caf50; }
+.status-tag.loc { background-color: #2196f3; }
+
+/* Itens do Menu */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.dropdown-item i { width: 20px; text-align: center; color: #ffffff; font-size: 16px; }
+.dropdown-item:hover { background-color: rgba(255, 255, 255, 0.1); }
+
+.dropdown-divider { border-top: 1px solid rgba(255, 255, 255, 0.2); margin: 8px 0; }
+.logout-item { color: #ffffff; } .logout-item:hover { background-color: rgba(255, 255, 255, 0.15); }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividade */
+@media (max-width: 900px) { .header-search { width: 300px; } }
+@media (max-width: 768px) { .header-search { display: none; } }
