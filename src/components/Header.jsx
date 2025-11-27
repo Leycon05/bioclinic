@@ -2,53 +2,55 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Header.css'; 
 
+// Importação das Imagens
 import LogoBioClinic from '../assets/imagens/logo-nome-lateral.svg';
+// Caminho do ícone de perfil
 const IconePerfil = "src/assets/imagens/perfil.svg"; 
 
 function Header() {
     const [dropdownAberto, setDropdownAberto] = useState(false);
     
-    // 1. Estado para controlar o Modo de Edição
+    // --- ESTADOS PARA O MODO DE EDIÇÃO ---
     const [isEditing, setIsEditing] = useState(false);
-
-    // 2. Estado para guardar os dados do usuário
     const [userData, setUserData] = useState({
         nome: "Dra. Leyla",
         idade: "34",
         sexo: "Feminino"
     });
-
-    // Estado temporário para inputs (enquanto digita)
     const [tempData, setTempData] = useState(userData);
 
     const toggleDropdown = () => {
         setDropdownAberto(!dropdownAberto);
-        // Se fechar o menu, sai do modo edição
-        if(dropdownAberto) setIsEditing(false);
+        // Se fechar o menu, sai do modo edição para resetar visualização
+        if(dropdownAberto) setIsEditing(false); 
     };
 
     // Entrar no modo edição
     const handleEditClick = () => {
-        setTempData(userData); // Copia dados atuais para edição
+        setTempData(userData); // Carrega dados atuais para edição
         setIsEditing(true);
     };
 
-    // Salvar alterações
+    // Salvar
     const handleSave = () => {
-        setUserData(tempData); // Salva os dados
-        setIsEditing(false);   // Volta para visualização
+        setUserData(tempData); // Salva o estado temporário no oficial
+        setIsEditing(false);
     };
 
-    // Cancelar alterações
+    // Cancelar
     const handleCancel = () => {
-        setIsEditing(false); // Só volta, sem salvar
+        setIsEditing(false); // Apenas fecha o modo edição
     };
 
-    // Atualizar inputs enquanto digita
+    // Atualizar inputs
     const handleChange = (e) => {
         const { name, value } = e.target;
         setTempData({ ...tempData, [name]: value });
     };
+
+    // Ações Extras
+    const handleRefazerBiometria = () => alert("Iniciando nova captura biométrica...");
+    const handleAtualizarLocal = () => alert("Atualizando localização GPS...");
 
     return (
         <header className="main-header">
@@ -74,17 +76,18 @@ function Header() {
                 {dropdownAberto && (
                     <div className="profile-dropdown-menu">
                         
-                        {/* --- CARTÃO DE INFORMAÇÕES --- */}
+                        {/* --- CARTÃO DE INFORMAÇÕES DO USUÁRIO --- */}
                         <div className="dropdown-user-info">
                             
+                            {/* Avatar fixo no topo */}
                             <div className="dropdown-user-avatar">
                                 <img src={IconePerfil} alt="Perfil" />
                             </div>
 
-                            {/* SE NÃO ESTIVER EDITANDO (Modo Visualização) */}
+                            {/* CONDICIONAL: MODO VISUALIZAÇÃO vs MODO EDIÇÃO */}
                             {!isEditing ? (
                                 <>
-                                    {/* Botão Lápis */}
+                                    {/* Botão de Lápis para Editar */}
                                     <button className="btn-edit-user" title="Editar Dados" onClick={handleEditClick}>
                                         <i className="fa-solid fa-pen"></i>
                                     </button>
@@ -99,47 +102,48 @@ function Header() {
                                     </div>
                                 </>
                             ) : (
-                                /* SE ESTIVER EDITANDO (Modo Edição - Inputs) */
+                                /* --- CAIXA DE EDIÇÃO --- */
                                 <div className="edit-mode-container">
                                     <input 
-                                        type="text" 
-                                        name="nome"
-                                        className="user-edit-input" 
-                                        value={tempData.nome} 
-                                        onChange={handleChange}
-                                        placeholder="Nome"
+                                        type="text" name="nome" className="user-edit-input" 
+                                        value={tempData.nome} onChange={handleChange} placeholder="Nome"
                                     />
                                     <div className="edit-row">
                                         <input 
-                                            type="text" 
-                                            name="idade"
-                                            className="user-edit-input small" 
-                                            value={tempData.idade} 
-                                            onChange={handleChange}
-                                            placeholder="Idade"
+                                            type="text" name="idade" className="user-edit-input small" 
+                                            value={tempData.idade} onChange={handleChange} placeholder="Idade"
                                         />
                                         <select 
-                                            name="sexo"
-                                            className="user-edit-input small"
-                                            value={tempData.sexo}
-                                            onChange={handleChange}
+                                            name="sexo" className="user-edit-input small"
+                                            value={tempData.sexo} onChange={handleChange}
                                         >
                                             <option value="Feminino">Feminino</option>
                                             <option value="Masculino">Masculino</option>
                                         </select>
                                     </div>
 
+                                    {/* Botões Extras: Biometria e Local */}
+                                    <div className="edit-extra-options">
+                                        <button className="btn-extra-action" onClick={handleRefazerBiometria}>
+                                            <i className="fa-solid fa-fingerprint"></i> Refazer Biometria
+                                        </button>
+                                        <button className="btn-extra-action" onClick={handleAtualizarLocal}>
+                                            <i className="fa-solid fa-location-dot"></i> Atualizar Local
+                                        </button>
+                                    </div>
+
+                                    {/* Ações: Salvar / Cancelar */}
                                     <div className="edit-actions">
                                         <button className="btn-save" onClick={handleSave}>Salvar</button>
                                         <button className="btn-cancel" onClick={handleCancel}>X</button>
                                     </div>
                                 </div>
                             )}
-
                         </div>
 
                         <div className="dropdown-divider"></div>
 
+                        {/* Links de Navegação */}
                         <Link to="/perfil" className="dropdown-item">
                             <i className="fa-regular fa-user"></i> Meu Perfil
                         </Link>
@@ -153,7 +157,6 @@ function Header() {
                     </div>
                 )}
             </div>
-
         </header>
     );
 }
