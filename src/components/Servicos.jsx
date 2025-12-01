@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Servicos.css';
 
 // Importação da Logo
 import LogoBioClinic from '../assets/imagens/logo-nome-lateral.svg';
+
+// Importação do Componente de Biometria Existente
+import Perfil from './Perfil';
 
 // Caminho do ícone de perfil
 const IconePerfil = "src/assets/imagens/perfil.svg"; 
@@ -20,6 +23,9 @@ const Header = () => {
         sexo: "Feminino"
     });
     const [tempData, setTempData] = useState(userData);
+
+    // Estado para controlar o Modal de Biometria
+    const [showBiometriaModal, setShowBiometriaModal] = useState(false);
 
     const toggleDropdown = () => {
         setDropdownAberto(!dropdownAberto);
@@ -44,6 +50,13 @@ const Header = () => {
         const { name, value } = e.target;
         setTempData({ ...tempData, [name]: value });
     };
+
+    // Ações Extras
+    const handleRefazerBiometria = () => {
+        setShowBiometriaModal(true);
+    };
+
+    const handleAtualizarLocal = () => alert("Atualizando localização GPS...");
 
     return (
         <header className="main-header">
@@ -76,17 +89,15 @@ const Header = () => {
                             {/* MODO VISUALIZAÇÃO */}
                             {!isEditing ? (
                                 <>
-                                    <button className="btn-edit-user" title="Editar Dados" onClick={handleEditClick}>
-                                        <i className="fa-solid fa-pen"></i>
-                                    </button>
+                                    {/* LÁPIS REMOVIDO DAQUI */}
 
                                     <p className="user-name"><strong>{userData.nome}</strong></p>
                                     <p className="user-detail">{userData.idade} anos</p>
                                     <p className="user-detail">{userData.sexo}</p>
                                     
                                     <div className="user-status-row">
-                                        <span className="status-tag bio">Biometria</span>
-                                        <span className="status-tag loc">Localização</span>
+                                        <span className="status-tag bio">Biometria OK</span>
+                                        <span className="status-tag loc">Localização OK</span>
                                     </div>
                                 </>
                             ) : (
@@ -95,32 +106,31 @@ const Header = () => {
                                     <span className="edit-mode-title">Editar Perfil</span>
                                     
                                     <input 
-                                        type="text" 
-                                        name="nome"
-                                        className="user-edit-input" 
-                                        value={tempData.nome} 
-                                        onChange={handleChange}
-                                        placeholder="Nome completo"
+                                        type="text" name="nome" className="user-edit-input" 
+                                        value={tempData.nome} onChange={handleChange} placeholder="Nome"
                                     />
-                                    
                                     <div className="edit-row">
                                         <input 
-                                            type="text" 
-                                            name="idade"
-                                            className="user-edit-input small" 
-                                            value={tempData.idade} 
-                                            onChange={handleChange}
-                                            placeholder="Idade"
+                                            type="text" name="idade" className="user-edit-input small" 
+                                            value={tempData.idade} onChange={handleChange} placeholder="Idade"
                                         />
                                         <select 
-                                            name="sexo"
-                                            className="user-edit-input small"
-                                            value={tempData.sexo}
-                                            onChange={handleChange}
+                                            name="sexo" className="user-edit-input small"
+                                            value={tempData.sexo} onChange={handleChange}
                                         >
                                             <option value="Feminino">Feminino</option>
                                             <option value="Masculino">Masculino</option>
                                         </select>
+                                    </div>
+
+                                    {/* Botões Extras */}
+                                    <div className="edit-extra-options">
+                                        <button className="btn-extra-action" onClick={handleRefazerBiometria}>
+                                            <i className="fa-solid fa-fingerprint"></i> Refazer Biometria
+                                        </button>
+                                        <button className="btn-extra-action" onClick={handleAtualizarLocal}>
+                                            <i className="fa-solid fa-location-dot"></i> Atualizar Local
+                                        </button>
                                     </div>
 
                                     <div className="edit-actions">
@@ -133,13 +143,34 @@ const Header = () => {
 
                         <div className="dropdown-divider"></div>
 
-                        <Link to="/perfil" className="dropdown-item"><i className="fa-regular fa-user"></i> Meu Perfil</Link>
-                        <Link to="/configuracoes" className="dropdown-item"><i className="fa-solid fa-gear"></i> Configurações</Link>
+                        {/* MENUS DO RODAPÉ DO DROPDOWN */}
+                        
+                        {/* BOTÃO EDITAR NO LUGAR DE PERFIL/CONFIGURAÇÕES */}
+                        {!isEditing && (
+                            <button className="dropdown-item btn-edit-menu" onClick={handleEditClick}>
+                                <i className="fa-solid fa-pen-to-square"></i> Editar Dados
+                            </button>
+                        )}
+
                         <div className="dropdown-divider"></div>
+                        
                         <Link to="/login" className="dropdown-item logout-item"><i className="fa-solid fa-arrow-right-from-bracket"></i> Sair</Link>
                     </div>
                 )}
             </div>
+
+            {/* --- MODAL DE BIOMETRIA --- */}
+            {showBiometriaModal && (
+                <div className="bio-modal-overlay">
+                    <button className="bio-modal-close-btn" onClick={() => setShowBiometriaModal(false)}>
+                        <i className="fa-solid fa-xmark"></i>
+                    </button>
+                    <div className="bio-modal-wrapper">
+                        <Perfil />
+                    </div>
+                </div>
+            )}
+
         </header>
     );
 };
@@ -178,9 +209,9 @@ function Servicos() {
                                 <p>Cuidados essenciais para a saúde e beleza da sua pele.</p>
                                 <button className="btn-saiba-mais">Saiba mais</button>
                             </div>
-                            <div className="service-card card-endocrinologia">
-                                <h3>Endocrinologia</h3>
-                                <p>Tratamento de distúrbios hormonais e metabólicos.</p>
+                            <div className="service-card card-telemedicina">
+                                <h3>Telemedicina</h3>
+                                <p>Consulta online, cuidado de qualidade. Agende seu horário conosco.</p>
                                 <button className="btn-saiba-mais">Saiba mais</button>
                             </div>
                             <div className="service-card card-cardiologia">

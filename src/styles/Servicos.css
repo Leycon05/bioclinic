@@ -2,254 +2,132 @@
    1. LAYOUT PRINCIPAL & RESET
    ========================================= */
 .servicos-page-container {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    height: 100vh;
-    background-color: #f5f7fa;
-    font-family: 'Inter', sans-serif;
-    overflow: hidden;
+    display: flex; flex-direction: column; width: 100vw; height: 100vh;
+    background-color: #f5f7fa; font-family: 'Inter', sans-serif; overflow: hidden;
 }
-
-.page-body {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-}
+.page-body { display: flex; flex: 1; overflow: hidden; }
 
 /* =========================================
    2. HEADER SUPERIOR
    ========================================= */
 .main-header {
-    background-color: rgba(99, 5, 39, 0.5); /* Vinho transparente */
-    height: 70px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-    border-bottom: 1px solid #e0e0e0;
-    z-index: 100;
-    flex-shrink: 0;
-    position: relative;
+    background-color: rgba(99, 5, 39, 0.5); height: 70px; width: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 30px; border-bottom: 1px solid #e0e0e0; z-index: 100;
+    flex-shrink: 0; position: relative;
 }
-
 .header-left { display: flex; align-items: center; gap: 40px; }
 .logo-img { height: 40px; width: auto; object-fit: contain; }
-
 .header-search {
-    display: flex;
-    align-items: center;
-    background-color: #f0f2f5;
-    border-radius: 5px;
-    padding: 8px 20px;
-    width: 500px;
-    border: 1px solid #630527;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    display: flex; align-items: center; background-color: #f0f2f5;
+    border-radius: 5px; padding: 8px 20px; width: 500px;
+    border: 1px solid #630527; position: absolute; left: 50%; transform: translateX(-50%);
 }
 .search-icon { color: #888; margin-right: 10px; font-size: 14px; }
 .search-input { background: transparent; border: none; outline: none; color: #333; width: 100%; font-family: 'Inter', sans-serif; font-size: 14px; }
 
-/* --- PERFIL --- */
+/* Perfil */
 .header-profile-container { position: relative; }
-
 .profile-trigger { 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-    cursor: pointer; 
-    padding: 6px 12px; 
-    border-radius: 30px; 
-    transition: background-color 0.2s; 
-    background-color: rgba(255, 255, 255, 0.1);
+    display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 6px 12px;
+    border-radius: 30px; transition: background-color 0.2s; background-color: rgba(255, 255, 255, 0.1);
 }
 .profile-trigger:hover { background-color: rgba(255, 255, 255, 0.3); }
-
 .profile-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 2px solid #fff; background-color: #fff; }
 .profile-icon-img { width: 100%; height: 100%; object-fit: cover; }
-
+.profile-name { color: #ffffff; font-weight: 600; font-size: 14px; }
 .dropdown-arrow { font-size: 12px; color: #ffffff; transition: transform 0.3s ease; margin-left: 5px; }
 .dropdown-arrow.open { transform: rotate(180deg); }
 
-/* --- MENU DROPDOWN --- */
+/* --- MENU DROPDOWN (TEMA BRANCO) --- */
 .profile-dropdown-menu {
-    position: absolute;
-    top: 140%;
-    right: 0;
-    width: 280px;
-    background-color: #630527; /* Fundo Vinho Escuro */
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    padding: 15px 0;
-    z-index: 1000;
-    animation: fadeIn 0.2s ease-out;
+    position: absolute; top: 140%; right: 0; width: 280px;
+    background-color: #ffffff; border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15); padding: 15px 0; border: 1px solid #e0e0e0;
+    z-index: 1000; animation: fadeIn 0.2s ease-out;
 }
-
-/* Setinha no topo */
 .profile-dropdown-menu::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    right: 20px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid #630527;
+    content: ""; position: absolute; top: -8px; right: 20px; width: 0; height: 0;
+    border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #ffffff;
 }
 
-/* --- INFO DO USUÁRIO & EDIÇÃO --- */
+/* Info Usuário */
 .dropdown-user-info {
-    padding: 0 20px 10px 20px;
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    min-height: 140px;
+    padding: 0 20px 10px 20px; color: #333;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    position: relative; min-height: 140px;
 }
-
-/* Botão Lápis */
-.btn-edit-user {
-    position: absolute;
-    top: 0;
-    right: 5px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: #ffffff;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 12px;
-    z-index: 10;
-}
-.btn-edit-user:hover { background-color: #ffffff; color: #630527; transform: scale(1.1); }
 
 /* Foto Grande */
 .dropdown-user-avatar {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid rgba(255,255,255,0.3);
-    margin-bottom: 10px;
-    background-color: #fff;
-    flex-shrink: 0;
+    width: 70px; height: 70px; border-radius: 50%; overflow: hidden;
+    border: 3px solid #f0f2f5; margin-bottom: 10px; background-color: #fff; flex-shrink: 0;
 }
 .dropdown-user-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-/* Textos de Visualização */
-.user-name { font-size: 18px; margin-bottom: 5px; }
-.user-detail { font-size: 13px; color: #e0e0e0; margin-bottom: 3px; }
-
-.user-status-row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
-}
-
-.status-tag {
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #fff;
-}
+.user-name { font-size: 18px; margin-bottom: 5px; color: #333; }
+.user-detail { font-size: 13px; color: #666; margin-bottom: 3px; }
+.user-status-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.status-tag { font-size: 10px; padding: 4px 10px; border-radius: 12px; font-weight: 700; text-transform: uppercase; color: #fff; }
 .status-tag.bio { background-color: #4caf50; }
 .status-tag.loc { background-color: #2196f3; }
 
-/* --- CAIXA DE EDIÇÃO (NOVO) --- */
+/* --- CAIXA DE EDIÇÃO (TEMA BRANCO) --- */
 .edit-mode-container {
-    background-color: rgba(0, 0, 0, 0.2); /* Fundo da caixa escuro */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 12px;
-    width: 100%;
-    margin-top: 5px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    box-sizing: border-box;
+    background-color: #f9f9f9; border: 1px solid #e0e0e0;
+    border-radius: 8px; padding: 12px; width: 100%; margin-top: 5px;
+    display: flex; flex-direction: column; gap: 8px; box-sizing: border-box;
 }
+.edit-mode-title { font-size: 11px; color: #888; text-transform: uppercase; align-self: flex-start; margin-bottom: 2px; }
 
 .user-edit-input {
-    width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: none;
-    background-color: #ffffff;
-    color: #333;
-    font-size: 13px;
-    outline: none;
-    font-family: 'Inter', sans-serif;
-    box-sizing: border-box;
-    text-align: center;
+    width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;
+    background-color: #ffffff; color: #333; font-size: 13px; outline: none;
+    font-family: 'Inter', sans-serif; box-sizing: border-box; text-align: center;
 }
-
-.user-edit-input:focus {
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
-}
-
-.edit-row {
-    display: flex;
-    gap: 8px;
-    width: 100%;
-}
-
+.user-edit-input:focus { border-color: #630527; box-shadow: 0 0 0 2px rgba(99, 5, 39, 0.1); }
+.edit-row { display: flex; gap: 8px; width: 100%; }
 .user-edit-input.small { width: 50%; }
 
-/* Botões da Edição */
-.edit-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 5px;
-    width: 100%;
+/* Botões Extras */
+.edit-extra-options { width: 100%; display: flex; flex-direction: column; gap: 6px; margin-top: 5px; }
+.btn-extra-action {
+    width: 100%; background-color: #ffffff; border: 1px solid #d0d0d0; color: #555;
+    padding: 6px; border-radius: 6px; cursor: pointer; font-size: 11px;
+    text-align: left; display: flex; align-items: center; gap: 8px;
+    transition: all 0.2s; font-family: 'Inter', sans-serif;
 }
+.btn-extra-action i { width: 15px; text-align: center; color: #630527; }
+.btn-extra-action:hover { background-color: #f0f2f5; color: #333; border-color: #bbb; }
 
+/* Botões Salvar/Cancelar */
+.edit-actions { display: flex; gap: 8px; margin-top: 8px; width: 100%; }
 .btn-save {
-    flex: 1;
-    padding: 7px;
-    border-radius: 4px;
-    border: none;
-    background-color: #4caf50; /* Verde */
-    color: white;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    text-transform: uppercase;
+    flex: 1; padding: 7px; border-radius: 4px; border: none;
+    background-color: #4caf50; color: white; font-size: 12px; font-weight: 700;
+    cursor: pointer; text-transform: uppercase;
 }
 .btn-save:hover { background-color: #43a047; }
-
 .btn-cancel {
-    padding: 7px 12px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background-color: transparent;
-    color: white;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
+    padding: 7px 12px; border-radius: 4px; border: 1px solid #ccc;
+    background-color: #fff; color: #666; font-size: 12px; font-weight: 600; cursor: pointer;
 }
-.btn-cancel:hover { background-color: rgba(255, 255, 255, 0.1); }
+.btn-cancel:hover { background-color: #f0f0f0; color: #333; }
 
-/* --- Itens do Menu --- */
-.dropdown-item { display: flex; align-items: center; gap: 12px; padding: 12px 20px; text-decoration: none; color: #ffffff; font-size: 14px; font-weight: 500; transition: all 0.2s; }
-.dropdown-item i { width: 20px; text-align: center; color: #ffffff; font-size: 16px; }
-.dropdown-item:hover { background-color: rgba(255, 255, 255, 0.1); }
+/* Links do Menu & Botão de Editar Dados */
+.dropdown-item, .btn-edit-menu { 
+    display: flex; align-items: center; gap: 12px; padding: 12px 20px; 
+    text-decoration: none; color: #333; font-size: 14px; font-weight: 500; 
+    transition: background-color 0.2s; font-family: 'Inter', sans-serif;
+    /* Reset de botão para parecer link */
+    background: none; border: none; width: 100%; text-align: left; cursor: pointer;
+}
+.dropdown-item i, .btn-edit-menu i { width: 20px; text-align: center; color: #888; font-size: 16px; }
+.dropdown-item:hover, .btn-edit-menu:hover { background-color: #f9f9f9; color: #630527; }
+.dropdown-item:hover i, .btn-edit-menu:hover i { color: #630527; }
 
-.dropdown-divider { border-top: 1px solid rgba(255, 255, 255, 0.2); margin: 8px 0; }
-.logout-item { color: #ffffff; } .logout-item:hover { background-color: rgba(255, 255, 255, 0.15); }
+.dropdown-divider { border-top: 1px solid #eee; margin: 8px 0; }
+.logout-item { color: #c62828; } .logout-item i { color: #c62828; }
+.logout-item:hover { background-color: #fff5f5; color: #d32f2f; }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
@@ -257,16 +135,42 @@
 }
 
 /* =========================================
+   8. MODAL DE BIOMETRIA ESTRUTURA
+   ========================================= */
+.bio-modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); display: flex; 
+    justify-content: center; align-items: center; z-index: 2000; animation: fadeIn 0.3s;
+}
+.bio-modal-wrapper {
+    width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; position: relative;
+}
+/* Força o componente Perfil a ficar transparente dentro do modal */
+.bio-modal-wrapper .background-container {
+    background: none !important; padding: 0 !important; min-height: auto !important; box-shadow: none !important;
+}
+/* Estiliza o card de login dentro do modal */
+.bio-modal-wrapper .login-card {
+    background-color: #fff; padding: 30px; border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5); max-width: 400px; width: 90%; animation: slideUp 0.3s ease-out;
+}
+/* Botão de Fechar X */
+.bio-modal-close-btn {
+    position: absolute; top: 20px; right: 30px; background: transparent;
+    border: none; color: white; font-size: 30px; cursor: pointer;
+    z-index: 2001; transition: transform 0.2s;
+}
+.bio-modal-close-btn:hover { transform: scale(1.2); color: #ff6b6b; }
+
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =========================================
    3. SIDEBAR (LATERAL)
    ========================================= */
 .sidebar {
-    width: 240px;
-    background-color: rgba(99, 5, 39, 0.35);
-    border-right: 1px solid #e0e0e0;
-    padding: 30px 15px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
+    width: 240px; background-color: rgba(99, 5, 39, 0.35);
+    border-right: 1px solid #e0e0e0; padding: 30px 15px;
+    display: flex; flex-direction: column; overflow-y: auto;
 }
 .nav-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
 .nav-item { display: flex; align-items: center; padding: 12px 15px; text-decoration: none; color: #ffffff; font-size: 15px; font-weight: 500; border-radius: 10px; transition: all 0.3s; gap: 12px; }
@@ -288,33 +192,18 @@
 .services-grid {
     display: grid;
     grid-template-columns: 1fr 1fr; /* 2 colunas */
-    gap: 30px;
-    margin-bottom: 40px;
+    gap: 30px; margin-bottom: 40px;
 }
 
 /* --- Estilo do Card Padrão --- */
 .service-card {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 40px 25px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff; border-radius: 20px; padding: 40px 25px;
+    text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #f0f0f0;
-    width: 450px; /* Largura fixa */
-    height: 300px; /* Altura fixa */
-    margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center;
+    border: 1px solid #f0f0f0; width: 450px; height: 300px; margin: 0 auto;
 }
-
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-}
-
-/* --- Elementos Internos (Padrão) --- */
+.service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); }
 .service-card h3 { color: #333; margin-bottom: 15px; font-size: 20px; font-weight: 700; }
 .service-card p { color: #777; font-size: 14px; line-height: 1.6; margin-bottom: 25px; flex-grow: 1; }
 .btn-saiba-mais {
@@ -327,35 +216,27 @@
 /* =========================================
    6. ESTILOS ESPECIAIS (CARDS COM IMAGEM)
    ========================================= */
-
-/* Estilos comuns para todos os cards com imagem (texto branco, sombra, etc.) */
-.card-nutrologia, .card-dermatologia, .card-endocrinologia, .card-cardiologia {
+.card-nutrologia, .card-dermatologia, .card-telemedicina, .card-cardiologia {
     background-size: cover; background-position: center; border: none; color: white;
 }
-
-/* Ajustes de texto e botões */
-.card-nutrologia h3, .card-dermatologia h3, .card-endocrinologia h3, .card-cardiologia h3 {
+.card-nutrologia h3, .card-dermatologia h3, .card-telemedicina h3, .card-cardiologia h3 {
     color: #ffffff; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
-.card-nutrologia p, .card-dermatologia p, .card-endocrinologia p, .card-cardiologia p {
+.card-nutrologia p, .card-dermatologia p, .card-telemedicina p, .card-cardiologia p {
     color: #f0f0f0; font-weight: 500;
 }
-.card-nutrologia .btn-saiba-mais, .card-dermatologia .btn-saiba-mais, .card-endocrinologia .btn-saiba-mais, .card-cardiologia .btn-saiba-mais {
+.card-nutrologia .btn-saiba-mais, .card-dermatologia .btn-saiba-mais, .card-telemedicina .btn-saiba-mais, .card-cardiologia .btn-saiba-mais {
     border-color: #ffffff; color: #ffffff;
 }
-.card-nutrologia .btn-saiba-mais:hover, .card-dermatologia .btn-saiba-mais:hover, .card-endocrinologia .btn-saiba-mais:hover, .card-cardiologia .btn-saiba-mais:hover {
+.card-nutrologia .btn-saiba-mais:hover, .card-dermatologia .btn-saiba-mais:hover, .card-telemedicina .btn-saiba-mais:hover, .card-cardiologia .btn-saiba-mais:hover {
     background-color: #ffffff; color: #630527;
 }
-.card-nutrologia .icon-box, .card-dermatologia .icon-box, .card-endocrinologia .icon-box, .card-cardiologia .icon-box {
-    background-color: rgba(255, 255, 255, 0.2); color: #ffffff;
-    width: 70px; height: 70px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; font-size: 28px;
-}
 
-/* --- IMAGENS ESPECÍFICAS DE FUNDO --- */
+/* --- IMAGENS DE FUNDO --- */
 .card-nutrologia { background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('src/assets/imagens/nutricao.svg'); }
 .card-dermatologia { background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('/src/assets/imagens/pediatria.svg'); }
-.card-endocrinologia { background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('/src/assets/imagens/dna.svg'); }
-.card-cardiologia { background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('/src/assets/imagens/coracao.svg'); }
+.card-telemedicina { background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('src/assets/imagens/telemedicina.svg'); }
+.card-cardiologia { background-image: linear-gradient(to right, rgba(100, 20, 80, 0.8), rgba(180, 40, 100, 0.6)), url('src/assets/imagens/coracao.svg'); }
 
 /* =========================================
    7. RODAPÉ E RESPONSIVIDADE
@@ -372,7 +253,6 @@
     .services-grid { grid-template-columns: 1fr; }
     .header-search { width: 300px; }
 }
-
 @media (max-width: 768px) {
     .page-body { flex-direction: column; }
     .sidebar { width: 100%; height: auto; padding: 15px; }
