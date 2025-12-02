@@ -221,9 +221,7 @@ function Servicos() {
                             </div>
                         </div>
 
-                        <div className="footer-actions">
-                            <Link to="/home" className="btn-voltar-servicos">Voltar</Link>
-                        </div>
+                        
                     </div>
                 </main>
             </div>

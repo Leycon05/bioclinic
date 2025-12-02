@@ -12,6 +12,7 @@ function RoutesList() {
         { path: '/servicos', name: 'Sobre a Clínica e Serviços' },
         {path: '/perfil', name: 'Perfil' },
         {path: '/logado', name: 'Logado' },
+        {path: '/equipe-medica', name: 'Equipe Médica' }
     ];
 
     return (

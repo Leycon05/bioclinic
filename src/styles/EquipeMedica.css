@@ -1,0 +1,174 @@
+/* =========================================
+   ESTRUTURA GERAL
+   ========================================= */
+.equipe-page-container {
+    display: flex; flex-direction: column; width: 100vw; height: 100vh;
+    background-color: #f5f7fa; font-family: 'Inter', sans-serif; overflow: hidden;
+}
+.page-body { display: flex; flex: 1; overflow: hidden; }
+
+/* HEADER */
+.main-header { background-color: rgba(99, 5, 39, 0.5); height: 70px; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; border-bottom: 1px solid #e0e0e0; z-index: 100; flex-shrink: 0; position: relative; }
+.header-left { display: flex; align-items: center; gap: 40px; }
+.logo-img { height: 40px; width: auto; object-fit: contain; }
+.header-search { display: flex; align-items: center; background-color: #f0f2f5; border-radius: 5px; padding: 8px 20px; width: 500px; border: 1px solid #630527; position: absolute; left: 50%; transform: translateX(-50%); }
+.search-icon { color: #888; margin-right: 10px; font-size: 14px; }
+.search-input { background: transparent; border: none; outline: none; color: #333; width: 100%; font-family: 'Inter', sans-serif; font-size: 14px; }
+
+/* PERFIL */
+.header-profile-container { position: relative; }
+.profile-trigger { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 6px 12px; border-radius: 30px; transition: background-color 0.2s; background-color: rgba(255, 255, 255, 0.1); }
+.profile-trigger:hover { background-color: rgba(255, 255, 255, 0.3); }
+.profile-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 2px solid #fff; background-color: #fff; }
+.profile-icon-img { width: 100%; height: 100%; object-fit: cover; }
+.dropdown-arrow { font-size: 12px; color: #ffffff; margin-left: 5px; }
+
+/* Menu (Vinho) */
+.profile-dropdown-menu { position: absolute; top: 140%; right: 0; width: 280px; background-color: #630527; border-radius: 12px; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3); padding: 15px 0; border: none; z-index: 1000; animation: fadeIn 0.2s ease-out; }
+.profile-dropdown-menu::before { content: ""; position: absolute; top: -8px; right: 20px; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #630527; }
+
+/* Info Usuário */
+.dropdown-user-info { padding: 0 20px 10px 20px; color: #ffffff; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; min-height: 140px; }
+.dropdown-user-avatar { width: 70px; height: 70px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255,255,255,0.3); margin-bottom: 10px; background-color: #fff; flex-shrink: 0; }
+.dropdown-user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.user-name { font-size: 18px; margin-bottom: 5px; color: #ffffff; }
+.user-detail { font-size: 13px; color: #e0e0e0; margin-bottom: 3px; }
+.user-status-row { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+.status-tag { font-size: 10px; padding: 4px 10px; border-radius: 12px; font-weight: 700; text-transform: uppercase; color: #fff; }
+.status-tag.bio { background-color: #4caf50; } .status-tag.loc { background-color: #2196f3; }
+
+/* Edição */
+.edit-mode-container { background-color: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 12px; width: 100%; margin-top: 5px; display: flex; flex-direction: column; gap: 8px; box-sizing: border-box; }
+.edit-mode-title { font-size: 11px; color: #ccc; text-transform: uppercase; align-self: flex-start; margin-bottom: 2px; }
+.user-edit-input { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background-color: rgba(255,255,255,0.1); color: #ffffff; font-size: 13px; text-align: center; outline: none; }
+.edit-row { display: flex; gap: 8px; width: 100%; } .user-edit-input.small { width: 50%; }
+.edit-extra-options { width: 100%; display: flex; flex-direction: column; gap: 6px; margin-top: 5px; }
+.btn-extra-action { width: 100%; background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: #e0e0e0; padding: 6px; border-radius: 6px; cursor: pointer; font-size: 11px; text-align: left; display: flex; align-items: center; gap: 8px; }
+.edit-actions { display: flex; gap: 8px; margin-top: 8px; width: 100%; }
+.btn-save { flex: 1; padding: 7px; border-radius: 4px; border: none; background-color: #4caf50; color: white; font-weight: 700; cursor: pointer; }
+.btn-cancel { padding: 7px 12px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.4); background-color: transparent; color: white; font-weight: 600; cursor: pointer; }
+
+/* Links */
+.dropdown-item, .btn-edit-menu { display: flex; align-items: center; gap: 12px; padding: 12px 20px; text-decoration: none; color: #ffffff; font-size: 14px; font-weight: 500; transition: background 0.2s; background: none; border: none; width: 100%; text-align: left; cursor: pointer; font-family: 'Inter', sans-serif; }
+.dropdown-item:hover, .btn-edit-menu:hover { background-color: rgba(255, 255, 255, 0.1); }
+.dropdown-item i, .btn-edit-menu i { width: 20px; text-align: center; color: #ffffff; font-size: 16px; }
+.dropdown-divider { border-top: 1px solid rgba(255, 255, 255, 0.2); margin: 8px 0; }
+.logout-item { color: #ffffff; } .logout-item i { color: #ffffff; }
+
+/* Modal Bio */
+.bio-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 2000; animation: fadeIn 0.3s; }
+.bio-modal-wrapper { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; }
+.bio-modal-wrapper .background-container { background: none !important; padding: 0 !important; min-height: auto !important; box-shadow: none !important; }
+.bio-modal-wrapper .login-card { background-color: #fff; padding: 30px; border-radius: 16px; box-shadow: 0 15px 50px rgba(0,0,0,0.5); max-width: 400px; width: 90%; }
+.bio-modal-close-btn { position: absolute; top: 20px; right: 30px; background: transparent; border: none; color: white; font-size: 30px; cursor: pointer; z-index: 2001; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* SIDEBAR */
+.sidebar { width: 240px; background-color: rgba(99, 5, 39, 0.35); border-right: 1px solid #e0e0e0; padding: 30px 15px; display: flex; flex-direction: column; overflow-y: auto; }
+.nav-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.nav-item { display: flex; align-items: center; padding: 12px 15px; text-decoration: none; color: #ffffff; font-size: 15px; font-weight: 500; border-radius: 10px; transition: all 0.3s; gap: 12px; }
+.nav-item:hover { background-color: rgba(255, 255, 255, 0.2); color: #ffffff; }
+.nav-item.active { background-color: #ffffff; color: #630527; font-weight: 700; }
+
+/* CONTENT */
+.main-content { flex: 1; padding: 40px; overflow-y: auto; }
+.content-area { max-width: 1000px; margin: 0 auto; }
+.page-header { margin-bottom: 40px; }
+.page-header h1 { font-size: 32px; color: #0c2a4d; margin-bottom: 10px; font-weight: 700; }
+.page-header p { color: #666; font-size: 16px; }
+
+/* LISTA DE MÉDICOS */
+.doctors-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+.doctor-card-horizontal { background-color: rgba(99, 5, 39, 0.5); border-radius: 16px; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid rgba(255, 255, 255, 0.2); transition: transform 0.2s, box-shadow 0.2s; }
+.doctor-card-horizontal:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.doc-left-content { display: flex; align-items: center; gap: 25px; flex: 1; }
+.doctor-image-wrapper { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid #fff; }
+.doctor-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.doctor-info h3 { font-size: 18px; color: #ffffff; font-weight: 600; margin: 0; }
+.doc-right-action { display: flex; align-items: center; cursor: pointer; }
+.arrow-black { color: #000; font-size: 20px; transition: transform 0.2s; background-color: rgba(255,255,255,0.6); padding: 8px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; }
+.doctor-card-horizontal:hover .arrow-black { transform: translateX(5px); background-color: #ffffff; }
+
+/* =========================================
+   MODAL DO MÉDICO (ATUALIZADO)
+   ========================================= */
+.doctor-modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 2000; animation: fadeIn 0.3s;
+}
+
+.doctor-modal-detailed {
+    background-color: white; width: 500px; max-width: 90%;
+    border-radius: 20px; overflow: hidden; display: flex; flex-direction: column;
+    position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    padding: 30px;
+}
+
+.close-modal-btn {
+    position: absolute; top: 15px; right: 15px; background: none; border: none;
+    font-size: 24px; color: #888; cursor: pointer; z-index: 10;
+}
+
+.modal-detailed-content {
+    display: flex; gap: 40px; align-items: flex-start; margin-top: 10px;
+}
+
+/* Lado Esquerdo */
+.modal-col-left {
+    width: 35%;
+    display: flex; flex-direction: column; align-items: center;
+}
+
+.modal-img-container {
+    width: 140px; height: 140px; border-radius: 50%; overflow: hidden;
+    border: 4px solid #630527; margin-bottom: 20px;
+}
+.modal-img-container img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Campos do Modal */
+.modal-fields-container {
+    width: 100%; display: flex; flex-direction: column; gap: 12px;
+}
+
+.modal-field-item {
+    display: flex; flex-direction: column; text-align: center;
+    border-bottom: 1px solid #eee; padding-bottom: 5px;
+}
+
+.modal-field-item label {
+    font-size: 11px; color: #888; text-transform: uppercase; font-weight: 700; margin-bottom: 2px;
+}
+
+.modal-field-item span {
+    font-size: 14px; color: #333; font-weight: 600;
+}
+
+.highlight-blue { color: #2196f3 !important; }
+
+/* Lado Direito */
+.modal-col-right {
+    flex: 1; display: flex; flex-direction: column; gap: 20px;
+}
+
+.modal-col-right h2 {
+    font-size: 28px; color: #630527; margin: 0; font-weight: 700;
+    border-bottom: 2px solid #f5f5f5; padding-bottom: 10px;
+}
+
+.info-group {
+    display: flex; flex-direction: column;
+}
+.info-group label { font-size: 12px; color: #888; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+.info-group p { font-size: 18px; color: #333; margin: 0; font-weight: 500; }
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .page-body { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; padding: 15px; }
+    .header-search { display: none; }
+    .doctor-card-horizontal { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .doc-right-action { width: 100%; display: flex; justify-content: flex-end; }
+    
+    .modal-detailed-content { flex-direction: column; align-items: center; }
+    .modal-col-left, .modal-col-right { width: 100%; align-items: center; text-align: center; }
+}

@@ -11,6 +11,7 @@ import Servicos from './components/Servicos.jsx';
 import Perfil from './components/Perfil.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import Logado from './components/Logado.jsx'; // <-- 1. Importar o novo componente
+import EquipeMedica from './components/EquipeMedica.jsx';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route path="/servicos" element={<Servicos />} />
       <Route path="/perfil" element={<Perfil />} />
       <Route path="/logado" element={<Logado />} />  {/* <-- 2. Definir a nova rota */}
+      <Route path="/equipe-medica" element={<EquipeMedica />} />
 
       {/* --- Rotas Protegidas --- */}
       {/* <Route 
